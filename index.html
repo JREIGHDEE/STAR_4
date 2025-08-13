@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ... your head content ... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Journal for My Star</title>
+    
+    <!-- This link is crucial for all the styling to work -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- These are the custom fonts for the fantasy vibe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=MonteCarlo&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- ... your intro overlay ... -->
+    
+    <!-- This is the startup animation screen -->
     <div class="intro-overlay">
         <h1 class="intro-greeting">To my dearest star</h1>
     </div>
 
+    <!-- This div creates the animated sparkles in the background -->
     <div class="sparkle-container"></div>
 
+    <!-- This is the main content container that fades in after the intro -->
     <main class="container">
         <div class="header-container">
             <h1 class="main-greeting">A Journal for You</h1>
         </div>
 
+        <!-- This is the navigation menu with all your journal entries -->
         <nav class="journal-nav">
             <a href="chest.html" class="journal-link">
                 <span class="link-decoration"></span>
@@ -37,14 +51,15 @@
                 The First and After
                 <span class="link-decoration"></span>
             </a>
-            <!-- ADD THIS NEW LINK FOR THE NEW ENTRY -->
             <a href="beautiful.html" class="journal-link">
                 <span class="link-decoration"></span>
                 The most beautiful thing
                 <span class="link-decoration"></span>
             </a>
         </nav>
+        
         <div class="footer-decoration"></div>
     </main>
+
 </body>
 </html>
