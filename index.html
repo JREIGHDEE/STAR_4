@@ -1,281 +1,271 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Quiet Morning</title>
-code
-Code
-<script src="https://cdn.tailwindcss.com"></script>
+/* --- FONT IMPORTS --- */
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=MonteCarlo&display=swap');
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+/* --- GENERAL STYLING & ANIMATIONS --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-<style>
-    :root {
-        --bg-primary: #F4F1E8;
-        --bg-secondary: #EAE0D5;
-        --text-primary: #5C4033;
-        --text-secondary: #7A6C5D;
-        --accent: #D99E45;
-        --accent-dark: #A05D25;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+body {
+    background-color: #1a281f;
+    background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+    color: #e8e0d4;
+    font-family: 'IM Fell English', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    overflow: hidden; /* Hide scrollbars from sparkles */
+    position: relative;
+}
+
+/* --- SPARKLE ANIMATION --- */
+.sparkle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.sparkle-container::before,
+.sparkle-container::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 
+        /* Top-left quadrant */
+        -30vw 20vh 0 #fff, -40vw 10vh 2px #fff, -20vw 5vh 1px #fff,
+        -10vw 45vh 1px #fff, -35vw 35vh 0 #fff,
+        /* Top-right quadrant */
+        30vw 15vh 1px #fff, 45vw 5vh 0 #fff, 25vw 25vh 2px #fff,
+        15vw 40vh 1px #fff, 38vw 30vh 0 #fff,
+        /* Bottom-left quadrant */
+        -25vw 80vh 2px #fff, -42vw 90vh 0 #fff, -18vw 75vh 1px #fff,
+        -5vw 95vh 1px #fff, -33vw 60vh 0 #fff,
+        /* Bottom-right quadrant */
+        28vw 85vh 0 #fff, 48vw 95vh 2px #fff, 18vw 70vh 1px #fff,
+        8vw 98vh 0 #fff, 39vw 65vh 1px #fff;
+    animation: twinkle 5s alternate infinite;
+}
+
+.sparkle-container::after {
+    animation-delay: -2.5s; /* Offset second set of stars */
+}
+
+
+/* --- MAIN CONTAINER & DECORATIONS --- */
+.container {
+    background-color: rgba(20, 31, 24, 0.8);
+    border: 2px solid #8c7851;
+    box-shadow: 0 0 30px rgba(201, 173, 117, 0.3);
+    padding: 3rem 4rem;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1.5s ease-out;
+    border-image: url('data:image/svg+xml;charset=utf-8,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cstyle%3Epath%7Bfill:none;stroke:%238c7851;stroke-width:2%7D%3C/style%3E%3Cpath d="M0 50 C25 25,25 75,50 50 S75 25,100 50" /%3E%3C/svg%3E') 25 / 15px / 0 round;
+}
+
+.container::before, .container::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath d="M50 0 C20 20,20 80,50 100 S80 20,50 0 Z" fill="%238c7851" fill-opacity="0.2"/%3E%3C/svg%3E');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+.container::before {
+    top: -40px;
+    left: -40px;
+    transform: rotate(-45deg);
+}
+
+.container::after {
+    bottom: -40px;
+    right: -40px;
+    transform: rotate(135deg);
+}
+
+
+/* --- GREETING AND TITLES --- */
+.main-greeting {
+    font-family: 'MonteCarlo', cursive;
+    font-size: 4rem;
+    color: #e5d9c5;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 15px #c9ad75;
+    animation: gentleFloat 6s ease-in-out infinite;
+}
+
+.entry-title {
+    font-family: 'MonteCarlo', cursive;
+    font-size: 3.5rem;
+    color: #e5d9c5;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px #c9ad75;
+}
+
+/* --- NAVIGATION LINKS (MAIN PAGE) --- */
+.journal-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.journal-link {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.8rem;
+    color: #d1bda1;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.4s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.journal-link:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+    transform: scale(1.05);
+}
+
+/* Decorative flourishes on links */
+.journal-link .link-decoration {
+    display: inline-block;
+    width: 50px;
+    height: 1px;
+    background: #8c7851;
+    vertical-align: middle;
+    margin: 0 15px;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.journal-link:hover .link-decoration {
+    background: #c9ad75;
+}
+
+.journal-link .link-decoration::before {
+    content: '✧';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #8c7851;
+    transition: all 0.4s ease;
+}
+
+.journal-link .link-decoration:first-of-type::before {
+    right: -5px;
+}
+
+.journal-link .link-decoration:last-of-type::before {
+    left: -5px;
+}
+
+.journal-link:hover .link-decoration::before {
+    color: #fff;
+    text-shadow: 0 0 5px #fff;
+}
+
+
+/* --- INDIVIDUAL ENTRY PAGE STYLING --- */
+.page-container {
+    text-align: left;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.entry-content {
+    line-height: 1.9;
+    font-size: 1.2rem;
+    color: #e8e0d4;
+    column-count: 1; /* Default to 1 column */
+}
+
+/* Add columns for wider screens */
+@media (min-width: 768px) {
+    .entry-content:not(.poem) {
+        column-count: 2;
+        column-gap: 3rem;
     }
+}
 
+
+.entry-content p {
+    margin-bottom: 1.5em;
+}
+
+.entry-content i {
+    color: #c9ad75;
+    font-style: italic;
+}
+
+.poem p {
+    margin-bottom: 2em;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 3rem;
+    font-family: 'MonteCarlo', cursive;
+    font-size: 2rem;
+    color: #8c7851;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #c9ad75;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
     body {
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        font-family: 'Lora', serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        padding: 1rem;
     }
-    
-    .font-heading { font-family: 'Playfair Display', serif; }
-
-    .journal-entry {
-        display: none;
-        opacity: 0;
-        transition: opacity 0.8s ease-in-out;
+    .container {
+        padding: 2rem 1.5rem;
     }
-
-    .journal-entry.active {
-        display: block;
-        opacity: 1;
+    .main-greeting {
+        font-size: 2.5rem;
     }
-    
-    #opening-curtain {
-        transition: opacity 1.5s ease-out, visibility 1.5s;
+    .journal-link {
+        font-size: 1.5rem;
     }
-
-    .curtain-content {
-         transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    .entry-title {
+        font-size: 2.2rem;
     }
-
-    .hide-curtain {
-        opacity: 0;
-        visibility: hidden;
+    .entry-content {
+        font-size: 1rem;
     }
-    
-    .hide-curtain .curtain-content {
-        transform: scale(1.1);
-    }
-    
-    .interactive-item {
-        transition: transform 0.3s ease, filter 0.3s ease;
-        cursor: pointer;
-    }
-
-    .interactive-item:hover {
-        transform: scale(1.05) rotate(-2deg);
-        filter: brightness(1.1);
-    }
-    
-    .prose-custom {
-        font-size: 1.125rem;
-        line-height: 1.75;
-    }
-    
-    .prose-custom p {
-        margin-bottom: 1.5em;
-    }
-
-    .prose-custom blockquote {
-        margin-left: 1rem;
-        padding-left: 1rem;
-        border-left: 3px solid var(--accent);
-        font-style: italic;
-        color: var(--text-secondary);
-    }
-    
-    .drop-cap::first-letter {
-        font-family: 'Playfair Display', serif;
-        color: var(--accent-dark);
-        font-size: 4rem;
-        float: left;
-        line-height: 0.8;
-        padding-right: 0.5rem;
-        font-weight: 500;
-    }
-
-</style>
-</head>
-<body class="overflow-x-hidden">
-code
-Code
-<!-- Opening Curtain -->
-<div id="opening-curtain" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center">
-    <div class="text-center text-white p-8 curtain-content">
-        <h1 class="font-heading text-5xl md:text-7xl font-light mb-4">Good Morning, Star</h1>
-        <p class="text-lg text-gray-300 mb-8">The day is waiting.</p>
-        <button id="open-window-btn" class="bg-amber-50 text-stone-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-white transition-all duration-300 transform hover:scale-105">
-            Open the Window
-        </button>
-    </div>
-</div>
-
-<!-- Main Content -->
-<div id="main-content" class="opacity-0 transition-opacity duration-1000">
-    
-    <header class="w-full min-h-screen bg-cover bg-center flex items-center justify-center p-6" style="background-image: url('https://i.pinimg.com/originals/6e/f3/7a/6ef37a3534571e2043644b258380f682.jpg');">
-        <div class="text-center bg-white/70 backdrop-blur-sm p-10 rounded-lg shadow-xl">
-            <h1 class="font-heading text-4xl md:text-6xl text-stone-800">A Collection of Memories</h1>
-            <p class="mt-4 text-lg text-stone-600">Click on an item below to read an entry.</p>
-        </div>
-    </header>
-
-    <!-- Interactive Hub -->
-    <section id="interactive-hub" class="py-20 px-4 bg-amber-50">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-
-            <!-- Item 1 -->
-            <div class="text-center interactive-item" data-entry="entry-1">
-                <img src="https://i.pinimg.com/originals/5a/3c/6c/5a3c6c5a53e4889c1bab5812959f6cb7.png" alt="A pillow representing closeness" class="w-48 h-48 mx-auto rounded-full bg-white p-3 shadow-lg object-contain">
-                <h2 class="font-heading text-2xl mt-6 text-stone-700">My Head on Your Chest</h2>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="text-center interactive-item" data-entry="entry-2">
-                 <img src="https://static.vecteezy.com/system/resources/previews/024/043/729/original/a-cup-of-coffee-with-a-heart-on-it-in-a-cottagecore-aesthetic-png.png" alt="A coffee cup for a Saturday morning" class="w-48 h-48 mx-auto rounded-full bg-white p-3 shadow-lg object-contain">
-                <h2 class="font-heading text-2xl mt-6 text-stone-700">Saturday</h2>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="text-center interactive-item" data-entry="entry-3">
-                 <img src="https://static.vecteezy.com/system/resources/previews/022/100/393/original/watercolor-illustration-of-a-lipstick-kiss-mark-on-a-white-background-png.png" alt="A lipstick mark" class="w-48 h-48 mx-auto rounded-full bg-white p-3 shadow-lg object-contain">
-                <h2 class="font-heading text-2xl mt-6 text-stone-700">Marked by You</h2>
-            </div>
-
-            <!-- Item 4 -->
-            <div class="text-center interactive-item" data-entry="entry-4">
-                 <img src="https://cdn-icons-png.flaticon.com/512/5277/5277453.png" alt="Two hands reaching for each other" class="w-48 h-48 mx-auto rounded-full bg-white p-3 shadow-lg object-contain">
-                <h2 class="font-heading text-2xl mt-6 text-stone-700">The First and After</h2>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Journal Entries Container -->
-    <main class="w-full relative z-10">
-        
-        <!-- Entry 1 -->
-        <section id="entry-1" class="journal-entry min-h-screen py-20 px-4 flex items-center justify-center bg-secondary">
-            <div class="max-w-3xl w-full mx-auto bg-primary p-8 md:p-16 rounded-xl shadow-2xl relative">
-                <button class="close-btn absolute top-4 right-4 text-3xl text-stone-500 hover:text-stone-800">&times;</button>
-                <h2 class="font-heading text-4xl md:text-5xl text-center mb-10 text-stone-800">My head on your Chest</h2>
-                <div class="prose-custom text-justify text-stone-700">
-                    <p class="drop-cap">The first time I laid my head on your chest was the night I confessed. I remember thinking, <em>Should I? Is this too much?</em> But I did it anyway, and then I heard it. Your heart gave this quick, sudden thump, almost like it jumped. In my head I thought, <em>Was that because of me?</em> and I couldn’t stop smiling. I didn’t say anything, but in that moment I knew this was a place I wanted to come back to.</p>
-                    <p>When we had our first kiss, I found myself doing it again without thinking. I pulled back, still catching my breath, and rested my head there. <em>She’s going to feel how fast my heart’s going,</em> I thought. Then I realized yours was just as quick, pounding under my ear. It made me want to stay there and just listen.</p>
-                    <p>Then the first time we made love, afterwards, I stayed. My head on your bare chest, skin to skin. I didn’t even want to move. I remember thinking, <em>This is it. This is the closest I’ve ever been to anyone.</em> Your heart was slower now, steadier, and I felt like I could fall asleep right there and never wake up anywhere else.</p>
-                    <p>Since then, it has become something I always do. In quiet moments, without really planning it, I will rest my head there again. Sometimes I close my eyes and think, <em>What’s it saying this time?</em> I notice the little changes, when it is quick, when it is calm. It feels like it tells me things you do not say out loud.</p>
-                    <p>Somewhere along the way, it stopped being just a sound. It became something I need. Every time I hear it, I think about all those moments, the first startled thump, the rush after our kiss, the steady calm after our first night. And every time, I just want to stay there a little longer.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Entry 2 -->
-        <section id="entry-2" class="journal-entry min-h-screen py-20 px-4 flex items-center justify-center bg-secondary">
-            <div class="max-w-3xl w-full mx-auto bg-primary p-8 md:p-16 rounded-xl shadow-2xl relative">
-                <button class="close-btn absolute top-4 right-4 text-3xl text-stone-500 hover:text-stone-800">&times;</button>
-                <h2 class="font-heading text-4xl md:text-5xl text-center mb-10 text-stone-800">Saturday</h2>
-                 <div class="prose-custom text-justify text-stone-700">
-                    <p class="drop-cap">I woke up alone today. The bed was still warm where you had been, but not warm enough. The air felt different without you there. I lay there for a few seconds, blinking at the ceiling, letting the quiet sink in. It wasn’t a bad quiet, but it wasn’t the kind I liked. I missed the sound of your breathing next to me. I missed the weight of you curled against me.</p>
-                    <p>For a moment, I just stared at the empty space beside me and felt this little ache in my chest. I wondered where you had gone. Then I got up, and everything changed. When I stepped out of the bedroom, the smell hit me first. Something savory, warm, and familiar drifted through the air. Then I saw you, standing at the kitchen top, hair a little messy, moving with this gentle focus like the whole world outside that moment didn’t exist. The light from the window brushed against your face, and for a second, I just stood there quietly, not wanting to break it. Something in my chest softened right away. That ache from waking up alone was gone. I just… felt at peace seeing you there.</p>
-                    <p>You turned when you noticed me and smiled. You asked me how I was, and I said I was fine. Then, almost casually, you told me you had already made coffee for me and left it on the nightstand before I woke up. I didn’t even notice it was there. That small detail hit me so hard. You thought of me first thing in the morning. You wanted to take care of me before I even opened my eyes.</p>
-                    <blockquote>I think that is what changed. Before, I loved the idea of our future. I dreamed of it and felt excited when I imagined it. But after that morning, I didn’t just love the idea anymore. I loved the certainty of it.</blockquote>
-                    <p>I walked closer, still smiling at you, and offered to help. You kept working on your beefloaf dish while I took over the eggs. The smell of both dishes mixing together made the kitchen feel warmer somehow. I don’t know why, but standing there beside you, cooking like it was the most natural thing in the world, made me feel… full. Not just in my stomach, but in my heart.</p>
-                    <p>Right there at the table, while you were telling me something and smiling in that way you do, it hit me. We had already been feeling steady. But that morning, I saw it so clearly it was like watching a memory from the future. I could see you at the kitchen top, me coming up to hug you from behind, the warmth of the coffee you made, the easy rhythm of cooking side by side. The comfort of knowing this was ours.</p>
-                    <p>And gods, I wanted it. Not just someday. I wanted it now. Since that day, we have felt different. Closer. More loving. It’s not just “I can see us together” anymore. It’s “I can’t imagine it any other way.”</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Entry 3 -->
-         <section id="entry-3" class="journal-entry min-h-screen py-20 px-4 flex items-center justify-center bg-secondary">
-            <div class="max-w-3xl w-full mx-auto bg-primary p-8 md:p-16 rounded-xl shadow-2xl relative">
-                <button class="close-btn absolute top-4 right-4 text-3xl text-stone-500 hover:text-stone-800">&times;</button>
-                <h2 class="font-heading text-4xl md:text-5xl text-center mb-10 text-stone-800">Marked by You</h2>
-                <div class="prose-custom text-center italic text-stone-600">
-                    <p>The first bruise bloomed on my neck,<br>your lips spelling out a claim<br>in the quiet heat of our closeness.<br>It wasn’t just skin you touched—<br>it was the part of me that opens<br>only when trust is heavier than fear.</p>
-                    <p>Since then,<br>you’ve painted me again,<br>and again—<br>your mouth a brush of hunger,<br>your hands anchoring me<br>to the world we build in whispers and gasps.</p>
-                    <p>I have learned that loving you<br>is not just sweetness—<br>it’s the wild, unshaken rhythm<br>of wanting and being wanted.<br>It’s the way your eyes blaze,<br>and how my pulse forgets itself</p>
-                    <p>when you’re riled and unafraid.<br>I let you see all of me,<br>even the shameless parts,<br>because you’ve shown me<br>how safety can be raw and breathless.</p>
-                    <p>And every mark you leave<br>is a quiet promise—<br>that this fire between us<br>will not dim,<br>only deepen.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Entry 4 -->
-        <section id="entry-4" class="journal-entry min-h-screen py-20 px-4 flex items-center justify-center bg-secondary">
-            <div class="max-w-3xl w-full mx-auto bg-primary p-8 md:p-16 rounded-xl shadow-2xl relative">
-                <button class="close-btn absolute top-4 right-4 text-3xl text-stone-500 hover:text-stone-800">&times;</button>
-                <h2 class="font-heading text-4xl md:text-5xl text-center mb-10 text-stone-800">The First and After</h2>
-                 <div class="prose-custom text-center italic text-stone-600">
-                    <p>The first time,<br>I led.<br>Not to claim, not to own,<br>but to show you the fire in me<br>and the way it bends toward you.</p>
-                    <p>I wanted you stirred,<br>to see yourself<br>the way I do...strong, unshaken,<br>capable of making the world kneel.</p>
-                    <p>And you did.</p>
-                    <p>After that,<br>you began to lead.<br>Your touch spoke in a language<br>I never wanted to stop hearing.<br>You carried a quiet certainty,</p>
-                    <p>and I followed,<br>not out of surrender,<br>but because I wanted to learn<br>every way you could love me.</p>
-                    <p>Now each time,<br>I promise you something new.<br>A different way to pull you closer,<br>a different way to make you feel<br>how much of myself I’ve placed in your hands.</p>
-                    <p>It is not a contest<br>of who holds more power.<br>It is a dance<br>where each step<br>is a gift we take turns giving.</p>
-                    <p>And I will keep surprising you,<br>not just to keep the fire alive,<br>but because loving you<br>means never running out of ways<br>to make you know<br>you are worth every moment.</p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-    
-    <footer class="w-full py-16 bg-amber-50">
-        <div class="text-center">
-            <p class="font-heading text-xl text-stone-600">With love, always.</p>
-            <p class="mt-2 text-stone-500">- Your Moon</p>
-        </div>
-    </footer>
-
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const openBtn = document.getElementById('open-window-btn');
-        const curtain = document.getElementById('opening-curtain');
-        const mainContent = document.getElementById('main-content');
-        
-        openBtn.addEventListener('click', () => {
-            curtain.classList.add('hide-curtain');
-            mainContent.style.opacity = '1';
-            // Remove curtain from DOM after transition for better performance
-            setTimeout(() => {
-                curtain.remove();
-            }, 1500);
-        });
-
-        const interactiveItems = document.querySelectorAll('.interactive-item');
-        const journalEntries = document.querySelectorAll('.journal-entry');
-        const closeButtons = document.querySelectorAll('.close-btn');
-
-        interactiveItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const entryId = item.dataset.entry;
-                const entryToShow = document.getElementById(entryId);
-                
-                if (entryToShow) {
-                    entryToShow.classList.add('active');
-                    // Scroll to the entry smoothly
-                    entryToShow.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-        
-        closeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const entry = btn.closest('.journal-entry');
-                if (entry) {
-                    entry.classList.remove('active');
-                     // Scroll back to the interactive hub
-                    document.getElementById('interactive-hub').scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    });
-</script>
-</body>
-</html>
+}
