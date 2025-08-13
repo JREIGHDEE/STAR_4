@@ -207,18 +207,23 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
 .poem p { margin-bottom: 2em; }
 
 /* --- RETURN LINK --- */
-.back-link {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin-top: 2rem;
-    font-family: 'MonteCarlo', cursive;
-    font-size: 2.2rem;
-    color: #d8bf9f;
-    text-decoration: none;
-    transition: all 0.3s;
+/* ADD THESE NEW RULES FOR THE ARROW */
+.home-arrow-link {
+  position: fixed; /* Keeps it in the corner even if the page scrolls */
+  top: 2rem;
+  left: 2rem;
+  font-size: 2.5rem; /* Makes the arrow nice and visible */
+  font-weight: bold;
+  color: #d8bf9f;   /* A soft, dusty gold color from your palette */
+  text-decoration: none;
+  z-index: 50; /* Ensures it's above background elements */
+  transition: all 0.3s ease;
 }
-.back-link:hover { color: #a1887f; text-shadow: 0 0 5px #ffe0b2; }
+
+.home-arrow-link:hover {
+  color: #a1887f; /* A darker, warm taupe on hover */
+  transform: scale(1.15); /* A slight, pleasing zoom effect */
+}
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 600px) {
