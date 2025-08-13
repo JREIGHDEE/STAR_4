@@ -13,14 +13,14 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 2rem;
+    padding: 1rem; /* Reduced padding for mobile-first feel */
     overflow-x: hidden;
     position: relative;
 }
 
 /* --- STARTUP INTRO ANIMATION --- */
 .intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #fffde7 0%, #ffebef 100%); z-index: 100; display: flex; justify-content: center; align-items: center; animation: fadeOutOverlay 4s ease-out 3s forwards; }
-.intro-greeting { font-family: 'MonteCarlo', cursive; font-size: 5vw; color: #fff; text-shadow: 0 0 25px #d8a4a4; opacity: 0; transform: scale(0.8); animation: fadeInText 4s ease-out forwards; }
+.intro-greeting { font-family: 'MonteCarlo', cursive; font-size: 12vw; /* Use viewport width for perfect scaling */ color: #fff; text-shadow: 0 0 25px #d8a4a4; opacity: 0; transform: scale(0.8); animation: fadeInText 4s ease-out forwards; }
 @keyframes fadeInText { 0% { opacity: 0; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0; transform: scale(1); } }
 @keyframes fadeOutOverlay { from { opacity: 1; } to { opacity: 0; pointer-events: none; } }
 
@@ -36,27 +36,20 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
 
 /* --- MAIN CONTAINER & DECORATIONS --- */
 @keyframes fadeInMain { from { opacity: 0; } to { opacity: 1; } }
-.container { background-color: rgba(255, 250, 250, 0.85); border: 2px solid #e5b973; box-shadow: 0 0 40px rgba(229, 185, 115, 0.4); padding: 3rem 4rem; max-width: 800px; width: 100%; text-align: center; position: relative; z-index: 1; border-radius: 8px; backdrop-filter: blur(4px); opacity: 0; animation: fadeInMain 1s ease-in 4s forwards; }
-.container::before, .container::after { content: ''; position: absolute; width: 100px; height: 100px; background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath d="M50,5 C60,25 90,25 95,50 C90,75 60,75 50,95 C40,75 10,75 5,50 C10,25 40,25 50,5 Z" fill="%23e5b973" fill-opacity="0.2"/%3E%3C/svg%3E'); background-size: contain; background-repeat: no-repeat; opacity: 0.7; }
-.container::before { top: -40px; left: -40px; transform: rotate(-45deg); }
-.container::after { bottom: -40px; right: -40px; transform: rotate(135deg); }
+.container { background-color: rgba(255, 250, 250, 0.85); border: 2px solid #e5b973; box-shadow: 0 0 40px rgba(229, 185, 115, 0.4); padding: 2rem 1.5rem; /* Mobile-friendly padding */ max-width: 800px; width: 100%; text-align: center; position: relative; z-index: 1; border-radius: 8px; backdrop-filter: blur(4px); opacity: 0; animation: fadeInMain 1s ease-in 4s forwards; }
+.container::before, .container::after { content: ''; position: absolute; width: 80px; height: 80px; background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath d="M50,5 C60,25 90,25 95,50 C90,75 60,75 50,95 C40,75 10,75 5,50 C10,25 40,25 50,5 Z" fill="%23e5b973" fill-opacity="0.2"/%3E%3C/svg%3E'); background-size: contain; background-repeat: no-repeat; opacity: 0.7; }
+.container::before { top: -30px; left: -30px; transform: rotate(-45deg); }
+.container::after { bottom: -30px; right: -30px; transform: rotate(135deg); }
 
 /* --- GREETING AND TITLES --- */
-.main-greeting { font-family: 'MonteCarlo', cursive; color: #a1887f; text-shadow: 0 0 15px rgba(255, 224, 178, 0.9); font-size: 4rem; margin-bottom: 2rem; }
-.entry-title {
-    font-family: 'MonteCarlo', cursive;
-    color: #a1887f;
-    text-shadow: 0 0 15px rgba(255, 224, 178, 0.9);
-    font-size: 3.5rem;
-    margin-bottom: 2rem;
-    text-align: center; /* <<< THIS IS THE FIX FOR THE TITLE */
-}
+.main-greeting { font-family: 'MonteCarlo', cursive; color: #a1887f; text-shadow: 0 0 15px rgba(255, 224, 178, 0.9); font-size: 2.8rem; margin-bottom: 2rem; }
+.entry-title { font-family: 'MonteCarlo', cursive; color: #a1887f; text-shadow: 0 0 15px rgba(255, 224, 178, 0.9); font-size: 2.5rem; margin-bottom: 2rem; text-align: center; }
 
 /* --- NAVIGATION LINKS (MAIN PAGE) --- */
-.journal-nav { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; }
-.journal-link { font-family: 'IM Fell English', serif; font-size: 1.8rem; color: #bcaaa4; text-decoration: none; padding: 0.5rem 1rem; transition: all 0.4s ease; position: relative; display: inline-block; }
+.journal-nav { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem; }
+.journal-link { font-family: 'IM Fell English', serif; font-size: 1.5rem; color: #bcaaa4; text-decoration: none; padding: 0.5rem 1rem; transition: all 0.4s ease; position: relative; display: inline-block; }
 .journal-link:hover { color: #8d6e63; text-shadow: 0 0 10px #ffcc80; transform: scale(1.05); }
-.journal-link .link-decoration { display: inline-block; width: 50px; height: 1px; background: #e5b973; vertical-align: middle; margin: 0 15px; position: relative; transition: all 0.4s ease; }
+.journal-link .link-decoration { display: inline-block; width: 40px; height: 1px; background: #e5b973; vertical-align: middle; margin: 0 10px; position: relative; transition: all 0.4s ease; }
 .journal-link:hover .link-decoration { background: #d8a474; }
 .journal-link .link-decoration::before { content: '☀'; position: absolute; top: 50%; transform: translateY(-50%); font-size: 1rem; color: #e5b973; transition: all 0.4s ease; }
 .journal-link .link-decoration:first-of-type::before { right: -5px; }
@@ -65,7 +58,7 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
 
 /* --- INDIVIDUAL ENTRY PAGE STYLING --- */
 .page-container { text-align: left; animation: fadeInMain 1s forwards; }
-.entry-content { line-height: 1.9; font-size: 1.1rem; color: #8d6e63; text-align: justify; max-height: 55vh; overflow-y: auto; padding-right: 20px; margin-right: -10px; }
+.entry-content { line-height: 1.8; font-size: 1.1rem; color: #8d6e63; text-align: justify; max-height: 60vh; /* More height for vertical screens */ overflow-y: auto; padding-right: 15px; margin-right: -5px; }
 .entry-content::-webkit-scrollbar { width: 8px; }
 .entry-content::-webkit-scrollbar-track { background: rgba(255, 249, 231, 0.4); border-radius: 10px; }
 .entry-content::-webkit-scrollbar-thumb { background-color: #e5b973; border-radius: 10px; border: 2px solid rgba(255, 250, 250, 0.85); }
@@ -77,24 +70,28 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
 .poem strong { font-weight: bold; }
 
 /* --- HOME ARROW LINK --- */
-.home-arrow-link { position: fixed; top: 2rem; left: 2rem; font-size: 2.5rem; font-weight: bold; color: #d8bf9f; text-decoration: none; z-index: 50; transition: all 0.3s ease; }
+.home-arrow-link { position: fixed; top: 1.5rem; left: 1.5rem; font-size: 2.2rem; font-weight: bold; color: #d8bf9f; text-decoration: none; z-index: 50; transition: all 0.3s ease; }
 .home-arrow-link:hover { color: #a1887f; transform: scale(1.15); }
 
 /* --- YOUTUBE VIDEO CONTAINER --- */
-.video-container { margin-top: 3rem; position: relative; overflow: hidden; max-width: 100%; }
+.video-container { margin-top: 2rem; position: relative; overflow: hidden; max-width: 100%; }
 .video-placeholder { border: 2px dashed rgba(229, 185, 115, 0.6); border-radius: 8px; padding: 4rem 2rem; text-align: center; }
 .video-placeholder p { font-family: 'MonteCarlo', cursive; font-size: 1.8rem; color: #bcaaa4; line-height: 1.5; }
 .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; border: none; }
 .video-container { padding-bottom: 56.25%; height: 0; }
 
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 600px) {
-    body { padding: 1rem; }
-    .container { padding: 2rem 1.5rem; }
-    .main-greeting { font-size: 2.5rem; }
-    .journal-link { font-size: 1.5rem; }
-    .entry-title { font-size: 2.2rem; }
-    .entry-content { font-size: 1rem; padding-right: 10px; max-height: 60vh; }
-    .intro-greeting { font-size: 10vw; }
-    .home-arrow-link { top: 1rem; left: 1rem; font-size: 2rem; }
+/* --- STYLES FOR LARGER SCREENS (DESKTOPS) --- */
+@media (min-width: 768px) {
+    body { padding: 2rem; }
+    .container { padding: 3rem 4rem; }
+    .main-greeting { font-size: 4rem; }
+    .entry-title { font-size: 3.5rem; }
+    .journal-link { font-size: 1.8rem; }
+    .home-arrow-link { top: 2rem; left: 2rem; font-size: 2.5rem; }
+    
+    /* Re-enable two-column layout only on wider screens */
+    .entry-content:not(.poem) {
+        column-count: 2;
+        column-gap: 3rem;
+    }
 }
