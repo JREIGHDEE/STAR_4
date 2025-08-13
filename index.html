@@ -10,57 +10,41 @@
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=MonteCarlo&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Startup Animation Screen -->
+    <div class="intro-overlay">
+        <h1 class="intro-greeting">To my dearest star</h1>
+    </div>
 
-    <!-- The Welcome Greeting Overlay -->
-    <div id="welcome-overlay">
-        <div class="welcome-message">
-            <h1>To my dearest star...</h1>
-            <p>(Click to open)</p>
+    <div class="sparkle-container"></div>
+
+    <main class="container">
+        <div class="header-container">
+            <h1 class="main-greeting">A Journal for You</h1>
         </div>
-    </div>
 
-    <!-- The main content, hidden initially -->
-    <div id="main-content">
-        <div class="particle-container"></div>
-
-        <main class="container">
-            <div class="header-container">
-                <h1 class="main-greeting">The Entries</h1>
-            </div>
-
-            <nav class="journal-nav">
-                <a href="chest.html" class="journal-link">
-                    <span class="link-decoration"></span>
-                    My head on your Chest
-                    <span class="link-decoration"></span>
-                </a>
-                <a href="saturday.html" class="journal-link">
-                    <span class="link-decoration"></span>
-                    Saturday
-                    <span class="link-decoration"></span>
-                </a>
-                <a href="marked.html" class="journal-link">
-                    <span class="link-decoration"></span>
-                    Marked by You
-                    <span class="link-decoration"></span>
-                </a>
-                <a href="first-after.html" class="journal-link">
-                    <span class="link-decoration"></span>
-                    The First and After
-                    <span class="link-decoration"></span>
-                </a>
-            </nav>
-            <div class="footer-decoration"></div>
-        </main>
-    </div>
-
-    <!-- Simple script to handle the greeting fade -->
-    <script>
-        document.getElementById('welcome-overlay').addEventListener('click', function() {
-            this.classList.add('fade-out');
-            document.getElementById('main-content').classList.add('visible');
-        });
-    </script>
-
+        <nav class="journal-nav">
+            <a href="chest.html" class="journal-link">
+                <span class="link-decoration"></span>
+                My head on your Chest
+                <span class="link-decoration"></span>
+            </a>
+            <a href="saturday.html" class="journal-link">
+                <span class="link-decoration"></span>
+                Saturday
+                <span class="link-decoration"></span>
+            </a>
+            <a href="marked.html" class="journal-link">
+                <span class="link-decoration"></span>
+                Marked by You
+                <span class="link-decoration"></span>
+            </a>
+            <a href="first-after.html" class="journal-link">
+                <span class="link-decoration"></span>
+                The First and After
+                <span class="link-decoration"></span>
+            </a>
+        </nav>
+        <div class="footer-decoration"></div>
+    </main>
 </body>
 </html>
