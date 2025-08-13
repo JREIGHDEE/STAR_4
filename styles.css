@@ -9,10 +9,10 @@
 }
 
 body {
-    background-color: #fcefee; /* A soft pink base */
-    background: linear-gradient(135deg, #ffdde1 0%, #ffc2c8 50%, #ffb3c1 100%); /* Pink sunrise gradient */
-    background-image: url('https://www.transparenttextures.com/patterns/subtle-pink-dots.png');
-    color: #6d284f; /* A deep, warm magenta for text */
+    background-color: #fff9e6; /* Soft cream base */
+    background: linear-gradient(135deg, #fffde7 0%, #fff0f5 50%, #ffebee 100%); /* Pale Yellow -> Lavender Blush -> Pale Pink */
+    background-image: url('https://www.transparenttextures.com/patterns/light-paper-fibers.png');
+    color: #8d6e63; /* A soft, earthy brown for text */
     font-family: 'IM Fell English', serif;
     display: flex;
     justify-content: center;
@@ -30,7 +30,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #ffdde1 0%, #ffc2c8 100%);
+    background: linear-gradient(135deg, #fffde7 0%, #ffebef 100%);
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@ body {
     font-family: 'MonteCarlo', cursive;
     font-size: 5vw; /* Responsive font size */
     color: #fff;
-    text-shadow: 0 0 20px #c2185b;
+    text-shadow: 0 0 25px #d8a4a4;
     opacity: 0;
     transform: scale(0.8);
     animation: fadeInText 4s ease-out forwards;
@@ -60,7 +60,7 @@ body {
 }
 
 
-/* --- PINK SPARKLE ANIMATION --- */
+/* --- SUNRISE SPARKLE ANIMATION --- */
 .sparkle-container {
     position: fixed;
     top: 0;
@@ -80,19 +80,19 @@ body {
     content: '✧';
     position: absolute;
     font-size: 1.5rem;
-    color: #ff80ab; /* Bright pink */
-    text-shadow: 0 0 10px #f06292;
+    color: #ffd54f; /* Pale gold */
+    text-shadow: 0 0 10px #ffb74d;
     animation: twinkle 7s alternate infinite;
     opacity: 0;
 }
 .sparkle-container::before { top: 20%; left: 10%; animation-delay: 0s; font-size: 1rem; }
-.sparkle-container::after { top: 80%; left: 90%; animation-delay: -1s; }
+.sparkle-container::after { top: 80%; left: 90%; animation-delay: -1s; color: #ffcdd2; } /* Pale pink sparkle */
 body::before, body::after {
     content: '✧';
     position: fixed;
     pointer-events: none;
     z-index: 0;
-    color: #f8bbd0;
+    color: #ffecb3;
     animation: twinkle 7s alternate infinite;
     opacity: 0;
 }
@@ -107,9 +107,9 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
 }
 
 .container {
-    background-color: rgba(255, 240, 245, 0.85); /* Lavender blush with transparency */
-    border: 2px solid #e91e63; /* Pink border */
-    box-shadow: 0 0 40px rgba(233, 30, 99, 0.3);
+    background-color: rgba(255, 250, 250, 0.85); /* Snow white with transparency */
+    border: 2px solid #e5b973; /* Soft, dusty gold border */
+    box-shadow: 0 0 40px rgba(229, 185, 115, 0.4);
     padding: 3rem 4rem;
     max-width: 800px;
     width: 100%;
@@ -118,7 +118,6 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
     z-index: 1;
     border-radius: 8px;
     backdrop-filter: blur(4px);
-    /* Fade in after intro animation */
     opacity: 0;
     animation: fadeInMain 1s ease-in 4s forwards;
 }
@@ -128,7 +127,7 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
     position: absolute;
     width: 100px;
     height: 100px;
-    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath d="M50,5 C60,25 90,25 95,50 C90,75 60,75 50,95 C40,75 10,75 5,50 C10,25 40,25 50,5 Z" fill="%23e91e63" fill-opacity="0.2"/%3E%3C/svg%3E');
+    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath d="M50,5 C60,25 90,25 95,50 C90,75 60,75 50,95 C40,75 10,75 5,50 C10,25 40,25 50,5 Z" fill="%23e5b973" fill-opacity="0.2"/%3E%3C/svg%3E');
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.7;
@@ -140,8 +139,8 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
 /* --- GREETING AND TITLES --- */
 .main-greeting, .entry-title {
     font-family: 'MonteCarlo', cursive;
-    color: #c2185b; /* Deeper pink */
-    text-shadow: 0 0 15px rgba(255, 204, 204, 0.9);
+    color: #a1887f; /* A darker, warm taupe */
+    text-shadow: 0 0 15px rgba(255, 224, 178, 0.9);
 }
 .main-greeting { font-size: 4rem; margin-bottom: 2rem; }
 .entry-title { font-size: 3.5rem; margin-bottom: 2rem; }
@@ -151,45 +150,45 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
 .journal-link {
     font-family: 'IM Fell English', serif;
     font-size: 1.8rem;
-    color: #ad1457;
+    color: #bcaaa4; /* Lighter taupe */
     text-decoration: none;
     padding: 0.5rem 1rem;
     transition: all 0.4s ease;
     position: relative;
     display: inline-block;
 }
-.journal-link:hover { color: #880e4f; text-shadow: 0 0 10px #ff80ab; transform: scale(1.05); }
+.journal-link:hover { color: #8d6e63; text-shadow: 0 0 10px #ffcc80; transform: scale(1.05); }
 
 .journal-link .link-decoration {
     display: inline-block;
     width: 50px;
     height: 1px;
-    background: #e91e63;
+    background: #e5b973;
     vertical-align: middle;
     margin: 0 15px;
     position: relative;
     transition: all 0.4s ease;
 }
-.journal-link:hover .link-decoration { background: #c2185b; }
+.journal-link:hover .link-decoration { background: #d8a474; }
 .journal-link .link-decoration::before {
-    content: '❤';
+    content: '☀';
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     font-size: 1rem;
-    color: #e91e63;
+    color: #e5b973;
     transition: all 0.4s ease;
 }
 .journal-link .link-decoration:first-of-type::before { right: -5px; }
 .journal-link .link-decoration:last-of-type::before { left: -5px; }
-.journal-link:hover .link-decoration::before { color: #c2185b; text-shadow: 0 0 5px #ff80ab; }
+.journal-link:hover .link-decoration::before { color: #d8a474; text-shadow: 0 0 5px #ffd54f; }
 
 /* --- INDIVIDUAL ENTRY PAGE STYLING --- */
-.page-container { text-align: left; }
+.page-container { text-align: left; animation: fadeInMain 1s forwards; /* Also fade in entry pages */ }
 .entry-content {
     line-height: 1.9;
     font-size: 1.1rem;
-    color: #6d284f;
+    color: #8d6e63;
     text-align: justify;
     max-height: 55vh;
     overflow-y: auto;
@@ -198,12 +197,12 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
 }
 
 .entry-content::-webkit-scrollbar { width: 8px; }
-.entry-content::-webkit-scrollbar-track { background: rgba(255, 224, 230, 0.4); border-radius: 10px; }
-.entry-content::-webkit-scrollbar-thumb { background-color: #f06292; border-radius: 10px; border: 2px solid rgba(255, 240, 245, 0.85); }
-.entry-content::-webkit-scrollbar-thumb:hover { background-color: #e91e63; }
+.entry-content::-webkit-scrollbar-track { background: rgba(255, 249, 231, 0.4); border-radius: 10px; }
+.entry-content::-webkit-scrollbar-thumb { background-color: #e5b973; border-radius: 10px; border: 2px solid rgba(255, 250, 250, 0.85); }
+.entry-content::-webkit-scrollbar-thumb:hover { background-color: #d8a474; }
 
 .entry-content p { margin-bottom: 1.5em; }
-.entry-content i { color: #ad1457; font-style: italic; }
+.entry-content i { color: #a1887f; font-style: italic; }
 .poem { text-align: center; }
 .poem p { margin-bottom: 2em; }
 
@@ -215,11 +214,11 @@ body::after { top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem; }
     margin-top: 2rem;
     font-family: 'MonteCarlo', cursive;
     font-size: 2.2rem;
-    color: #f06292;
+    color: #d8bf9f;
     text-decoration: none;
     transition: all 0.3s;
 }
-.back-link:hover { color: #c2185b; text-shadow: 0 0 5px #ffc1d5; }
+.back-link:hover { color: #a1887f; text-shadow: 0 0 5px #ffe0b2; }
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 600px) {
