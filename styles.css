@@ -12,7 +12,7 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes sunrise-shift {
+@keyframes sunset-shift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
@@ -20,19 +20,19 @@
 
 @keyframes drift-up {
     0% { transform: translateY(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
     100% { transform: translateY(-100vh); opacity: 0; }
 }
 
 @keyframes spin-glow {
-    0%, 100% { transform: rotate(0deg); text-shadow: 0 0 8px #FFC107; }
-    50% { transform: rotate(180deg); text-shadow: 0 0 20px #FFC107; }
+    0%, 100% { transform: rotate(0deg); text-shadow: 0 0 8px #FFA07A; }
+    50% { transform: rotate(180deg); text-shadow: 0 0 20px #FFA07A; }
 }
 
 @keyframes sunbeam {
     0% { transform: translateY(100%) rotate(-10deg); opacity: 0; }
-    50% { opacity: 0.08; }
+    50% { opacity: 0.05; }
     100% { transform: translateY(-100%) rotate(10deg); opacity: 0; }
 }
 
@@ -47,10 +47,14 @@ body {
     font-family: 'IM Fell English', serif;
     min-height: 100vh;
     overflow: hidden;
-    /* Animated Sunrise Background */
-    background: linear-gradient(135deg, #FFDEB4, #FFEBCD, #FFDAB9, #FFB74D);
+    /* NEW: Pale Reddish Sunset Gradient */
+    background: linear-gradient(135deg, #FAD9C1, #FBC4AB, #E8A196, #F2B3A0);
     background-size: 400% 400%;
-    animation: sunrise-shift 25s ease infinite;
+    animation: sunset-shift 25s ease infinite;
+    /* FIX: Ensure centering on all pages */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* --- WELCOME GREETING OVERLAY --- */
@@ -60,7 +64,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255,222,173,1) 0%, rgba(255,199,142,1) 100%);
+    background: radial-gradient(circle, #FBC4AB 0%, #E8A196 100%);
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -76,7 +80,7 @@ body {
 
 .welcome-message {
     text-align: center;
-    color: #5D4037;
+    color: #6D4C41; /* Darker, slightly reddish brown */
     animation: floatIn 2s ease-out;
 }
 
@@ -99,11 +103,8 @@ body {
     visibility: hidden;
     transition: opacity 1s 1s ease, visibility 1s 1s ease;
     width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+    /* Let the body handle flex centering */
+    display: contents; 
 }
 
 #main-content.visible {
@@ -118,7 +119,7 @@ body::before, body::after {
     top: 0; left: 50%;
     width: 300%;
     height: 150%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08); /* Slightly more visible sunbeam */
     z-index: 0;
     animation: sunbeam 20s linear infinite;
 }
@@ -127,7 +128,7 @@ body::after {
     left: -100%;
 }
 
-.particle-container {
+.particle-container, body > .particle-container {
     position: fixed;
     top: 0; left: 0;
     width: 100%;
@@ -137,38 +138,39 @@ body::after {
 }
 
 .particle-container::before {
-    content: '✧ ･ﾟ: *✧･ﾟ:* ☀ *:･ﾟ✧*:･ﾟ✧';
+    content: '✧ ･ﾟ: *✧･ﾟ:* ♡ *:･ﾟ✧*:･ﾟ✧';
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     font-size: 1.5rem;
-    color: #FFD700;
-    text-shadow: 0 0 10px #FFA500;
+    /* NEW: Sunset colored particles */
+    color: #FFA07A; /* Light Salmon */
+    text-shadow: 0 0 10px #FF8C69;
     animation: drift-up 15s linear infinite;
     animation-delay: -5s;
 }
 .particle-container::after {
-    content: '*:･ﾟ✧.  Terncy *:･ﾟ.✧';
+    content: '*:･ﾟ✧.  I love you *:･ﾟ.✧';
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     font-size: 1rem;
     color: white;
-    text-shadow: 0 0 8px #FFC107;
+    text-shadow: 0 0 8px #FFA07A;
     animation: drift-up 20s linear infinite;
 }
 
-
 /* --- MAIN & ENTRY PAGE CONTAINER --- */
 .container {
-    background: rgba(255, 250, 240, 0.8);
-    border: 2px solid #D4AF37;
-    box-shadow: 0 0 50px rgba(255, 193, 7, 0.5);
+    background: rgba(255, 245, 238, 0.8); /* Warmer, rosy white */
+    /* NEW: Softer, coppery-rose border */
+    border: 2px solid #D99A7C;
+    box-shadow: 0 0 50px rgba(232, 161, 150, 0.5);
     padding: 3rem 4rem;
     max-width: 800px;
-    width: 100%;
+    width: 90%;
     text-align: center;
     position: relative;
     z-index: 1;
@@ -176,14 +178,19 @@ body::after {
     backdrop-filter: blur(5px);
     animation: floatIn 1.5s 1.5s ease-out backwards;
 }
+/* Ensure entry page containers also get the animation */
+.page-container {
+    animation: floatIn 1s ease-out;
+}
+
 
 /* --- TITLES --- */
 .main-greeting, .entry-title {
     font-family: 'MonteCarlo', cursive;
     font-size: 3.8rem;
-    color: #8D6E63;
+    color: #795548; /* Deep brown */
     margin-bottom: 2rem;
-    text-shadow: 0 0 15px rgba(255, 224, 178, 0.9);
+    text-shadow: 0 0 15px rgba(248, 196, 180, 0.9);
 }
 
 /* --- NAVIGATION --- */
@@ -204,8 +211,8 @@ body::after {
     position: relative;
 }
 .journal-link:hover {
-    color: #5D4037;
-    text-shadow: 0 0 12px #FFD700;
+    color: #6D4C41;
+    text-shadow: 0 0 12px #FFA07A;
     transform: scale(1.05);
 }
 
@@ -213,47 +220,48 @@ body::after {
     display: inline-block;
     width: 50px;
     height: 1px;
-    background: #D4AF37;
+    background: #D99A7C;
     vertical-align: middle;
     margin: 0 15px;
     position: relative;
     transition: all 0.4s ease;
 }
 
-.journal-link:hover .link-decoration { background: #FFC107; }
+.journal-link:hover .link-decoration { background: #E5A087; }
 
 .journal-link .link-decoration::before {
-    content: '☀';
+    content: '♡';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 1.2rem;
-    color: #D4AF37;
+    font-size: 1rem;
+    color: #D99A7C;
     transition: all 0.6s ease;
 }
 
 .journal-link:hover .link-decoration::before {
     animation: spin-glow 2s linear infinite;
+    color: #FFA07A;
 }
 
 /* --- INDIVIDUAL ENTRY PAGE STYLING --- */
-.page-container { animation: floatIn 1s ease-out; }
-
 .entry-content {
     line-height: 1.9;
     font-size: 1.1rem;
-    color: #5D4037;
+    color: #6D4C41;
     text-align: justify;
     max-height: 55vh;
     overflow-y: auto;
-    padding-right: 20px;
+    /* FIX: Symmetrical padding to ensure it's centered */
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .entry-content::-webkit-scrollbar { width: 8px; }
-.entry-content::-webkit-scrollbar-track { background: rgba(255, 224, 178, 0.3); border-radius: 10px; }
-.entry-content::-webkit-scrollbar-thumb { background-color: #D4AF37; border-radius: 10px; border: 2px solid rgba(255, 250, 240, 0.85); }
-.entry-content::-webkit-scrollbar-thumb:hover { background-color: #FFC107; }
+.entry-content::-webkit-scrollbar-track { background: rgba(248, 196, 180, 0.3); border-radius: 10px; }
+.entry-content::-webkit-scrollbar-thumb { background-color: #D99A7C; border-radius: 10px; border: 2px solid rgba(255, 245, 238, 0.8); }
+.entry-content::-webkit-scrollbar-thumb:hover { background-color: #E5A087; }
 
 .entry-content p { margin-bottom: 1.5em; }
 .entry-content i { color: #A1887F; font-style: italic; }
@@ -271,13 +279,13 @@ body::after {
     text-decoration: none;
     transition: all 0.3s;
 }
-.back-link:hover { color: #8D6E63; text-shadow: 0 0 5px #FFD700; }
+.back-link:hover { color: #795548; text-shadow: 0 0 5px #FFA07A; }
 
 /* --- RESPONSIVENESS --- */
 @media (max-width: 768px) {
     .welcome-message h1 { font-size: 3rem; }
-    .container { padding: 2rem 1.5rem; }
+    .container { padding: 2rem 1rem; }
     .main-greeting, .entry-title { font-size: 2.5rem; }
     .journal-link { font-size: 1.5rem; }
-    .entry-content { font-size: 1rem; max-height: 60vh; }
+    .entry-content { font-size: 1rem; max-height: 60vh; padding-left: 10px; padding-right: 5px; }
 }
