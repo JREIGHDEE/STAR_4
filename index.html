@@ -1,271 +1,45 @@
-/* --- FONT IMPORTS --- */
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=MonteCarlo&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Journal for My Star</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=MonteCarlo&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sparkle-container"></div>
 
-/* --- GENERAL STYLING & ANIMATIONS --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <main class="container">
+        <div class="header-container">
+            <h1 class="main-greeting">To my dearest star,</h1>
+        </div>
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes gentleFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-body {
-    background-color: #1a281f;
-    background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
-    color: #e8e0d4;
-    font-family: 'IM Fell English', serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 2rem;
-    overflow: hidden; /* Hide scrollbars from sparkles */
-    position: relative;
-}
-
-/* --- SPARKLE ANIMATION --- */
-.sparkle-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
-}
-
-.sparkle-container::before,
-.sparkle-container::after {
-    content: '';
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 
-        /* Top-left quadrant */
-        -30vw 20vh 0 #fff, -40vw 10vh 2px #fff, -20vw 5vh 1px #fff,
-        -10vw 45vh 1px #fff, -35vw 35vh 0 #fff,
-        /* Top-right quadrant */
-        30vw 15vh 1px #fff, 45vw 5vh 0 #fff, 25vw 25vh 2px #fff,
-        15vw 40vh 1px #fff, 38vw 30vh 0 #fff,
-        /* Bottom-left quadrant */
-        -25vw 80vh 2px #fff, -42vw 90vh 0 #fff, -18vw 75vh 1px #fff,
-        -5vw 95vh 1px #fff, -33vw 60vh 0 #fff,
-        /* Bottom-right quadrant */
-        28vw 85vh 0 #fff, 48vw 95vh 2px #fff, 18vw 70vh 1px #fff,
-        8vw 98vh 0 #fff, 39vw 65vh 1px #fff;
-    animation: twinkle 5s alternate infinite;
-}
-
-.sparkle-container::after {
-    animation-delay: -2.5s; /* Offset second set of stars */
-}
-
-
-/* --- MAIN CONTAINER & DECORATIONS --- */
-.container {
-    background-color: rgba(20, 31, 24, 0.8);
-    border: 2px solid #8c7851;
-    box-shadow: 0 0 30px rgba(201, 173, 117, 0.3);
-    padding: 3rem 4rem;
-    max-width: 800px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    animation: fadeIn 1.5s ease-out;
-    border-image: url('data:image/svg+xml;charset=utf-8,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cstyle%3Epath%7Bfill:none;stroke:%238c7851;stroke-width:2%7D%3C/style%3E%3Cpath d="M0 50 C25 25,25 75,50 50 S75 25,100 50" /%3E%3C/svg%3E') 25 / 15px / 0 round;
-}
-
-.container::before, .container::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath d="M50 0 C20 20,20 80,50 100 S80 20,50 0 Z" fill="%238c7851" fill-opacity="0.2"/%3E%3C/svg%3E');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.5;
-}
-
-.container::before {
-    top: -40px;
-    left: -40px;
-    transform: rotate(-45deg);
-}
-
-.container::after {
-    bottom: -40px;
-    right: -40px;
-    transform: rotate(135deg);
-}
-
-
-/* --- GREETING AND TITLES --- */
-.main-greeting {
-    font-family: 'MonteCarlo', cursive;
-    font-size: 4rem;
-    color: #e5d9c5;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 15px #c9ad75;
-    animation: gentleFloat 6s ease-in-out infinite;
-}
-
-.entry-title {
-    font-family: 'MonteCarlo', cursive;
-    font-size: 3.5rem;
-    color: #e5d9c5;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 10px #c9ad75;
-}
-
-/* --- NAVIGATION LINKS (MAIN PAGE) --- */
-.journal-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-.journal-link {
-    font-family: 'IM Fell English', serif;
-    font-size: 1.8rem;
-    color: #d1bda1;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: all 0.4s ease;
-    position: relative;
-    display: inline-block;
-}
-
-.journal-link:hover {
-    color: #fff;
-    text-shadow: 0 0 10px #fff;
-    transform: scale(1.05);
-}
-
-/* Decorative flourishes on links */
-.journal-link .link-decoration {
-    display: inline-block;
-    width: 50px;
-    height: 1px;
-    background: #8c7851;
-    vertical-align: middle;
-    margin: 0 15px;
-    position: relative;
-    transition: all 0.4s ease;
-}
-
-.journal-link:hover .link-decoration {
-    background: #c9ad75;
-}
-
-.journal-link .link-decoration::before {
-    content: '✧';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    color: #8c7851;
-    transition: all 0.4s ease;
-}
-
-.journal-link .link-decoration:first-of-type::before {
-    right: -5px;
-}
-
-.journal-link .link-decoration:last-of-type::before {
-    left: -5px;
-}
-
-.journal-link:hover .link-decoration::before {
-    color: #fff;
-    text-shadow: 0 0 5px #fff;
-}
-
-
-/* --- INDIVIDUAL ENTRY PAGE STYLING --- */
-.page-container {
-    text-align: left;
-    animation: fadeIn 1s ease-in-out;
-}
-
-.entry-content {
-    line-height: 1.9;
-    font-size: 1.2rem;
-    color: #e8e0d4;
-    column-count: 1; /* Default to 1 column */
-}
-
-/* Add columns for wider screens */
-@media (min-width: 768px) {
-    .entry-content:not(.poem) {
-        column-count: 2;
-        column-gap: 3rem;
-    }
-}
-
-
-.entry-content p {
-    margin-bottom: 1.5em;
-}
-
-.entry-content i {
-    color: #c9ad75;
-    font-style: italic;
-}
-
-.poem p {
-    margin-bottom: 2em;
-}
-
-.back-link {
-    display: inline-block;
-    margin-top: 3rem;
-    font-family: 'MonteCarlo', cursive;
-    font-size: 2rem;
-    color: #8c7851;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.back-link:hover {
-    color: #c9ad75;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    body {
-        padding: 1rem;
-    }
-    .container {
-        padding: 2rem 1.5rem;
-    }
-    .main-greeting {
-        font-size: 2.5rem;
-    }
-    .journal-link {
-        font-size: 1.5rem;
-    }
-    .entry-title {
-        font-size: 2.2rem;
-    }
-    .entry-content {
-        font-size: 1rem;
-    }
-}
+        <nav class="journal-nav">
+            <a href="chest.html" class="journal-link">
+                <span class="link-decoration"></span>
+                My head on your Chest
+                <span class="link-decoration"></span>
+            </a>
+            <a href="saturday.html" class="journal-link">
+                <span class="link-decoration"></span>
+                Saturday
+                <span class="link-decoration"></span>
+            </a>
+            <a href="marked.html" class="journal-link">
+                <span class="link-decoration"></span>
+                Marked by You
+                <span class="link-decoration"></span>
+            </a>
+            <a href="first-after.html" class="journal-link">
+                <span class="link-decoration"></span>
+                The First and After
+                <span class="link-decoration"></span>
+            </a>
+        </nav>
+        <div class="footer-decoration"></div>
+    </main>
+</body>
+</html>
