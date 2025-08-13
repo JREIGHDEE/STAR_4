@@ -1,302 +1,306 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Quiet Morning</title>
-    
+    <title>Our Saturday Morning</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Karla:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
-        /* 
+        /*
         ==========================================================================
-        SUPERB & ADVANCED CSS SECTION V6 (DEFINITIVE)
+        SUPERB & ADVANCED CSS SECTION V7 (DEFINITIVE & POLISHED)
         ==========================================================================
-        AESTHETIC: "ANIMATED COTTAGE-CORE DIORAMA"
-        This version transforms the page into an immersive, animated scene. It
-        features a dynamic sunrise, layered background elements, and interactive
-        3D-styled objects that reveal the journal entries. The goal is a warm,
-        tactile, and emotionally resonant experience.
+        AESTHETIC: "INTERACTIVE COTTAGE-CORE WINDOW"
+        This definitive version fully realizes the prompt. It features a detailed,
+        interactive opening sequence, a layered and animated background scene,
+        and beautifully styled content modals that feel like pages from a
+        scrapbook. The focus is on immersive animation, tactile interaction,
+        and a warm, cohesive art direction.
         ==========================================================================
         */
 
         :root {
-            --bg-pre-dawn: #2c3e50;
-            --bg-dawn: #fde6d3;
-            --wood-desk: #6b4f4b;
-            --text-dark: #3E322F;
-            --text-light: #7b6a64;
-            --accent-gold: #c89b7b;
-            --parchment: #FBF5EB;
-            --shadow-color: rgba(74, 58, 53, 0.2);
+            --bg-color: #F4F1E8;
+            --text-primary: #5a4b46;
+            --text-secondary: #8c7b75;
+            --accent-warm: #d4a373;
+            --wood-tone: #8a6d5d;
+            --foliage: #6a7a5c;
+            --shadow-light: rgba(90, 75, 70, 0.15);
+            --shadow-dark: rgba(90, 75, 70, 0.3);
         }
 
         body {
-            font-family: 'Nunito Sans', sans-serif;
-            color: var(--text-dark);
-            overflow: hidden; /* Prevent scroll during animations */
-        }
-        
-        .font-heading { font-family: 'Playfair Display', serif; }
-
-        /* --- Scene & Animation --- */
-        #scene-container {
-            position: fixed;
-            inset: 0;
-            background-color: var(--bg-pre-dawn);
-            transition: background-color 5s ease-in-out;
-        }
-        
-        #scene-container.daybreak {
-            background-color: var(--bg-dawn);
-        }
-
-        #window-view {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, #3a506b, #2c3e50);
-            transition: background 5s ease-in-out;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Karla', sans-serif;
             overflow: hidden;
         }
 
-        #scene-container.daybreak #window-view {
-             background: linear-gradient(to top, #f8c291, #fbc6a4, #fde6d3);
-        }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
 
-        .sunbeam {
-            position: absolute;
-            top: -10%;
-            left: 50%;
-            width: 200%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(255, 235, 205, 0.3) 0%, rgba(255, 235, 205, 0) 60%);
-            transform-origin: center center;
-            opacity: 0;
-            transition: opacity 6s 1s ease-out, transform 8s 1s ease-out;
+        /* --- Intro & Window Animation --- */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s 0.5s ease-out;
         }
-        
-        #scene-container.daybreak .sunbeam {
-            opacity: 1;
-            transform: scale(1.2) translate(-10%, 5%);
-        }
-
-        #desk {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 40vh;
-            background-color: var(--wood-desk);
-            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-            border-top: 5px solid #5a403a;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
-            transform: perspective(1000px) rotateX(25deg) translateY(20%);
-        }
-        
-        /* --- Interactive Objects --- */
-        .interactive-object {
-            position: absolute;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            transform-style: preserve-3d;
-        }
-        .interactive-object:hover {
-            transform: translateY(-15px) rotateZ(-2deg) scale(1.05);
-            filter: drop-shadow(0 15px 15px var(--shadow-color));
-        }
-        .object-icon {
-            transition: transform 0.4s ease;
-        }
-        .interactive-object:hover .object-icon {
-            transform: scale(1.1);
-        }
-        .object-label {
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,255,255,0.8);
-            color: var(--text-dark);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease, bottom 0.3s ease;
-        }
-        .interactive-object:hover .object-label {
-            opacity: 1;
-            bottom: -45px;
-        }
-        
-        /* Steam Animation for coffee mug */
-        .steam {
-            position: absolute;
-            height: 50px; width: 1px;
-            background: white;
-            opacity: 0;
-            filter: blur(1px);
-            animation: steam-rise 4s infinite ease-out;
-        }
-        .steam.s1 { top: -60px; left: 15px; animation-delay: 0s; }
-        .steam.s2 { top: -70px; left: 30px; animation-delay: 1.5s; }
-        .steam.s3 { top: -50px; left: 45px; animation-delay: 2.5s; }
-
-        @keyframes steam-rise {
-            0% { transform: translateY(0) scaleY(1); opacity: 0; }
-            15% { opacity: 0.6; }
-            80% { transform: translateY(-40px) scaleY(1.5); opacity: 0.1; }
-            100% { transform: translateY(-50px) scaleY(1.8); opacity: 0; }
-        }
-        
-        /* --- Modal Styling --- */
-        .modal-overlay {
-            position: fixed; inset: 0; z-index: 100;
-            background-color: rgba(50, 40, 35, 0.5);
-            backdrop-filter: blur(8px);
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-        .modal-overlay.active {
-            opacity: 1; pointer-events: auto;
-        }
-        .modal-content {
-            background-color: var(--parchment);
-            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
-            width: 90%; max-width: 650px;
-            max-height: 85vh;
-            border-radius: 8px;
-            padding: 2.5rem 3rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid #e7d8c4;
-            overflow-y: auto;
-            transform: translateY(20px) scale(0.95);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .modal-overlay.active .modal-content {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-        .modal-content h2 {
-            color: var(--text-dark);
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        .modal-content p {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-        }
-        .modal-content em { color: var(--accent-gold); }
-        .modal-content .highlight {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            text-align: center;
-            display: block;
-            margin: 2.5rem 0;
-            font-size: 1.4rem;
-            color: var(--accent-gold);
-            line-height: 1.7;
-        }
-
-        /* --- Initial Curtain --- */
-        #curtain {
-            position: fixed; inset: 0; z-index: 200;
-            background-color: #1a1a1a;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 1.5s ease;
-        }
-        #curtain.drawn {
+        #intro-overlay.hidden {
             opacity: 0;
             pointer-events: none;
         }
 
+        #window-frame {
+            position: absolute;
+            inset: 5%;
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png'), linear-gradient(var(--wood-tone), #7b6053);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 40px rgba(0,0,0,0.3);
+            border-radius: 4px;
+            display: flex;
+            cursor: pointer;
+        }
+
+        .shutter {
+            width: 50%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png'), linear-gradient(#4a3c36, #3e322f);
+            transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transform-origin: left;
+            border-right: 2px solid #2a221f;
+        }
+        .shutter.right {
+            transform-origin: right;
+            border-right: none;
+            border-left: 2px solid #2a221f;
+        }
+        #intro-overlay.hidden .shutter.left { transform: perspective(1500px) rotateY(-110deg); }
+        #intro-overlay.hidden .shutter.right { transform: perspective(1500px) rotateY(110deg); }
+
+        #intro-text {
+            color: white;
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
+        #intro-overlay.hidden #intro-text { opacity: 0; }
+
+        /* --- Main Scene --- */
+        #main-scene {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to top, #4a5c6a, #2c3e50);
+            transition: background 8s ease-in-out;
+            overflow: hidden;
+        }
+        #main-scene.sunrise {
+            background: linear-gradient(to top, #f8c291, #fbc6a4, #fde6d3);
+        }
+
+        .sky-element {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 100%;
+            transition: opacity 8s ease;
+        }
+        #clouds {
+            background: url('https://www.transparenttextures.com/patterns/fog.png');
+            animation: drift 90s linear infinite;
+            opacity: 0.3;
+        }
+        @keyframes drift {
+            from { transform: translateX(-25%); }
+            to { transform: translateX(25%); }
+        }
+        #sun {
+            width: 200px; height: 200px;
+            left: 50%;
+            background: radial-gradient(circle, #fffbeB 20%, rgba(255,251,235,0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, 100%);
+            transition: transform 10s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #main-scene.sunrise #sun { transform: translate(-50%, 10%); }
+
+        /* --- Room Interior --- */
+        #room-interior {
+            position: fixed; inset: 0; z-index: 10;
+        }
+        #room-window-frame {
+            position: absolute;
+            inset: 5%;
+            background: transparent;
+            box-shadow: 0 0 20px 10px rgba(0,0,0,0.5);
+            pointer-events: none; /* Let clicks pass through */
+        }
+        .plant {
+            position: absolute;
+            filter: drop-shadow(3px 3px 5px var(--shadow-dark));
+        }
+
+        /* --- Interactive Objects --- */
+        .interactive-object {
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+            z-index: 15;
+        }
+        .interactive-object:hover {
+            transform: scale(1.1) translateY(-10px);
+            filter: drop-shadow(0 15px 20px var(--shadow-dark));
+        }
+
+        /* --- Modal Styling --- */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 100;
+            background-color: rgba(50, 40, 35, 0.6);
+            backdrop-filter: blur(10px) saturate(150%);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-content {
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/subtle-white-feathers.png');
+            width: 90%; max-width: 650px;
+            max-height: 85vh;
+            border-radius: 4px;
+            padding: 3rem 3.5rem;
+            box-shadow: 0 2px 4px var(--shadow-light), 0 15px 40px var(--shadow-dark);
+            border: 1px solid #e7d8c4;
+            border-left: 5px solid var(--accent-warm);
+            overflow-y: auto;
+            transform: scale(0.95); opacity: 0;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); opacity: 1; }
+
+        .modal-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--text-primary);
+        }
+        .modal-content p {
+            font-size: 1.1rem;
+            line-height: 2;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        .modal-content em, .modal-content i {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--accent-warm);
+            font-size: 1.2rem;
+        }
+        .modal-content .highlight {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 600;
+            text-align: center;
+            display: block;
+            margin: 2.5rem 0;
+            font-size: 1.6rem;
+            color: var(--accent-warm);
+            line-height: 1.7;
+        }
+        .modal-content blockquote {
+            border-left: 3px solid var(--accent-warm);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
     </style>
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-100">
 
-    <!-- Initial Loading Screen/Curtain -->
-    <div id="curtain">
-        <button id="start-day-btn" class="text-white border-2 border-white rounded-full px-10 py-4 font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300">
-            Start the Day
-        </button>
+    <!-- Intro Overlay -->
+    <div id="intro-overlay">
+        <div id="window-frame">
+            <div id="intro-text" class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                <h1 class="font-serif text-4xl mt-4">Open the window</h1>
+                <p>A new day is here.</p>
+            </div>
+            <div class="shutter left"></div>
+            <div class="shutter right"></div>
+        </div>
     </div>
 
     <!-- Main Scene -->
-    <div id="scene-container">
-        <div id="window-view">
-            <div class="sunbeam"></div>
+    <div id="main-scene">
+        <div id="sun" class="sky-element"></div>
+        <div id="clouds" class="sky-element"></div>
+    </div>
+
+    <!-- Room -->
+    <div id="room-interior">
+        <!-- Window Frame -->
+        <div id="room-window-frame"></div>
+        
+        <!-- Table -->
+        <div class="absolute bottom-0 left-0 right-0 h-[25vh]" style="background: linear-gradient(to top, #4a3c36, transparent);"></div>
+
+        <!-- Plant -->
+        <svg class="plant absolute -bottom-10 -right-20 w-80 h-80 text-green-800 opacity-60" style="color: var(--foliage);" viewBox="0 0 24 24" fill="currentColor"><path d="M17 2H7C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5M7.05 19.89c-1.39-.42-2.5-1.53-2.92-2.92L16.24 4.86c1.39.42 2.5 1.53 2.92 2.92L7.05 19.89m7.74-13.67c-.23.64-.69 1.15-1.28 1.45l-4.11 2.37-2.38 4.11c-.3.6-.82 1.05-1.45 1.28L3.22 17.8c-.64.23-1.15.69-1.45 1.28l-1.63 4.11-4.11-1.63c-.6-.3-1.05-.82-1.28-1.45L.11 7.05c-.23-.64-.69-1.15-1.28-1.45l4.11-2.37 2.38-4.11c.3-.6.82-1.05 1.45-1.28l2.37-4.11L14.79 6.22Z"/></svg>
+        
+        <!-- Interactive Journal -->
+        <div id="object-journal" class="interactive-object" style="bottom: 8%; left: 10%; width: 180px; transform: rotate(-8deg);">
+            <svg class="drop-shadow-lg" viewBox="0 0 200 250"><defs><filter id="paper-texture" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise"/><feDiffuseLighting in="noise" lighting-color="#e2dacc" surfaceScale="2"><feDistantLight azimuth="45" elevation="60"/></feDiffuseLighting></filter></defs><path d="M10 20 H190 V230 H10 Z" fill="#785e56"/><path d="M20 10 H180 V240 H20 Z" fill="var(--bg-color)" style="filter: url(#paper-texture);"/><line x1="40" y1="50" x2="160" y2="50" stroke="#d4c8be" stroke-width="2"/><line x1="40" y1="70" x2="160" y2="70" stroke="#d4c8be" stroke-width="2"/><line x1="40" y1="90" x2="160" y2="90" stroke="#d4c8be" stroke-width="2"/></svg>
         </div>
-        <div id="desk">
-            <!-- Interactive Object 1: Journal -->
-            <div id="object-journal" class="interactive-object w-24 h-32" style="bottom: 15%; left: 15%; transform: rotateZ(-10deg);">
-                <div class="object-icon bg-[#5D433B] w-full h-full rounded-md shadow-lg border-2 border-[#4a3530] p-2 flex items-center justify-center">
-                   <svg class="w-10 h-10 text-[#c89b7b]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-                </div>
-                <span class="object-label">My Head on Your Chest</span>
-            </div>
-
-            <!-- Interactive Object 2: Coffee Mug -->
-            <div id="object-mug" class="interactive-object w-24 h-24" style="bottom: 20%; left: 40%;">
-                <div class="object-icon relative w-full h-full flex items-end justify-center">
-                    <div class="w-20 h-20 bg-[#FBF5EB] rounded-full shadow-inner"></div>
-                    <div class="absolute w-8 h-12 border-4 border-[#FBF5EB] rounded-r-full" style="right: -15px; top: 15px;"></div>
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-20 opacity-0" id="steam-container">
-                         <span class="steam s1"></span><span class="steam s2"></span><span class="steam s3"></span>
-                    </div>
-                </div>
-                <span class="object-label">Saturday</span>
-            </div>
-
-            <!-- Interactive Object 3: Locket -->
-             <div id="object-locket" class="interactive-object w-16 h-20" style="bottom: 10%; left: 65%; transform: rotateZ(5deg);">
-                <div class="object-icon w-full h-full flex items-center justify-center">
-                    <svg class="w-16 h-16 text-[#c89b7b] drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M3.213 6.38a.75.75 0 01.033-.034L11.53 1.75a.75.75 0 01.94 0l8.284 4.596a.75.75 0 01.033.034c.32.275.467.712.392 1.127l-1.353 7.442a27.18 27.18 0 01-1.125 4.886c-.461 1.41-1.02 2.763-1.68 4.027a.75.75 0 01-1.32-.62c.62-1.196 1.144-2.457 1.58-3.771l1.248-6.862a.75.75 0 01.077-.309l-7.234-4.004a.75.75 0 00-.732 0L4.41 9.813a.75.75 0 01.077.309l1.248 6.862c.436 1.314.96 2.575 1.58 3.77a.75.75 0 11-1.32.621c-.66-1.264-1.219-2.617-1.68-4.027a27.182 27.182 0 01-1.125-4.886L2.82 7.507a.75.75 0 01.392-1.127z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M12 10.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM6.75 12.75a5.25 5.25 0 1110.5 0 5.25 5.25 0 01-10.5 0z" clip-rule="evenodd" /></svg>
-                </div>
-                 <span class="object-label">Marked By You</span>
-            </div>
-
-            <!-- Interactive Object 4: Photo -->
-            <div id="object-photo" class="interactive-object w-32 h-24" style="bottom: 25%; left: 80%; transform: rotateZ(8deg);">
-                <div class="object-icon bg-[#FBF5EB] w-full h-full rounded-sm shadow-lg p-2 border-4 border-[#c89b7b] flex items-center justify-center">
-                    <svg class="w-12 h-12 text-[#9f8572]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
-                </div>
-                <span class="object-label">The First and After</span>
-            </div>
+        
+        <!-- Interactive Mug -->
+        <div id="object-mug" class="interactive-object" style="bottom: 25%; right: 12%; width: 120px;">
+            <svg class="drop-shadow-md" viewBox="0 0 100 100"><g><path d="M10 20 a 40 40 0 0 1 80 0 v 60 a 40 40 0 0 1 -80 0 Z" fill="#fdfbf5"/><path d="M90 35 a 15 25 0 0 1 0 50" fill="none" stroke="#fdfbf5" stroke-width="15"/></g></svg>
+        </div>
+        
+        <!-- Interactive Locket -->
+        <div id="object-locket" class="interactive-object" style="top: 25%; right: 35%; width: 50px;">
+            <svg class="drop-shadow-lg" viewBox="0 0 24 24"><path fill="#e3c19f" d="M12 2C9.25 2 7 4.25 7 7s2.25 5 5 5 5-2.25 5-5S14.75 2 12 2zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm0 2c-2.33 0-7 1.17-7 3.5V18h14v-2.5c0-2.33-4.67-3.5-7-3.5zm6.5 2H18v-2.5c0-.44-.22-.85-.6-1.12.7-.42 1.1-1.16 1.1-2.02 0-1.24-1.01-2.25-2.25-2.25S14 7.26 14 8.5c0 .86.4 1.6 1.1 2.02-.38.27-.6.68-.6 1.12V16h-1.08c-1.33-1.28-2.2-3.03-2.2-5 0-3.47 2.61-6.31 6-6.89V3h2v1.11c3.39.58 6 3.42 6 6.89 0 1.97-.87 3.72-2.2 5z"/></svg>
+        </div>
+        
+        <!-- Interactive Photo -->
+        <div id="object-photo" class="interactive-object" style="bottom: 5%; left: 45%; width: 100px; transform: rotate(5deg);">
+            <svg class="drop-shadow-md" viewBox="0 0 100 120"><rect x="5" y="5" width="90" height="90" fill="#d4c8be"/><rect x="0" y="0" width="100" height="120" fill="none" stroke="#fff" stroke-width="10"/></svg>
         </div>
     </div>
     
     <!-- Modals -->
     <div id="modal-journal" class="modal-overlay">
         <div class="modal-content">
-            <h2 class="font-heading">My Head on Your Chest</h2>
-            <p>The first time I laid my head on your chest was the night I confessed. I remember thinking, <em>Should I? Is this too much?</em> But I did it anyway, and then I heard it. Your heart gave this quick, sudden thump, almost like it jumped. In my head I thought, <em>Was that because of me?</em> and I couldn’t stop smiling. I didn’t say anything, but in that moment I knew this was a place I wanted to come back to.</p>
-            <p>When we had our first kiss, I found myself doing it again without thinking. I pulled back, still catching my breath, and rested my head there. <em>She’s going to feel how fast my heart’s going,</em> I thought. Then I realized yours was just as quick, pounding under my ear. It made me want to stay there and just listen.</p>
-            <p>Then the first time we made love, afterwards, I stayed. My head on your bare chest, skin to skin. I didn’t even want to move. I remember thinking, <em>This is it. This is the closest I’ve ever been to anyone.</em> Your heart was slower now, steadier, and I felt like I could fall asleep right there and never wake up anywhere else.</p>
-            <p>Since then, it has become something I always do. In quiet moments, without really planning it, I will rest my head there again. Sometimes I close my eyes and think, <em>What’s it saying this time?</em> I notice the little changes, when it is quick, when it is calm. It feels like it tells me things you do not say out loud.</p>
+            <h2 class="font-serif">My Head on Your Chest</h2>
+            <p>The first time I laid my head on your chest was the night I confessed. I remember thinking, <i>Should I? Is this too much?</i> But I did it anyway, and then I heard it. Your heart gave this quick, sudden thump, almost like it jumped. In my head I thought, <i>Was that because of me?</i> and I couldn’t stop smiling. I didn’t say anything, but in that moment I knew this was a place I wanted to come back to.</p>
+            <p>When we had our first kiss, I found myself doing it again without thinking. I pulled back, still catching my breath, and rested my head there. <i>She’s going to feel how fast my heart’s going,</i> I thought. Then I realized yours was just as quick, pounding under my ear. It made me want to stay there and just listen.</p>
+            <p>Then the first time we made love, afterwards, I stayed. My head on your bare chest, skin to skin. I didn’t even want to move. I remember thinking, <i>This is it. This is the closest I’ve ever been to anyone.</i> Your heart was slower now, steadier, and I felt like I could fall asleep right there and never wake up anywhere else.</p>
+            <p>Since then, it has become something I always do. In quiet moments, without really planning it, I will rest my head there again. Sometimes I close my eyes and think, <i>What’s it saying this time?</i> I notice the little changes, when it is quick, when it is calm. It feels like it tells me things you do not say out loud.</p>
             <p>Somewhere along the way, it stopped being just a sound. It became something I need. Every time I hear it, I think about all those moments, the first startled thump, the rush after our kiss, the steady calm after our first night. And every time, I just want to stay there a little longer.</p>
         </div>
     </div>
     
     <div id="modal-mug" class="modal-overlay">
         <div class="modal-content">
-            <h2 class="font-heading">Saturday</h2>
+            <h2 class="font-serif">Saturday</h2>
             <p>I woke up alone today. The bed was still warm where you had been, but not warm enough. The air felt different without you there. I lay there for a few seconds, blinking at the ceiling, letting the quiet sink in. It wasn’t a bad quiet, but it wasn’t the kind I liked. I missed the sound of your breathing next to me. I missed the weight of you curled against me.</p>
             <p>For a moment, I just stared at the empty space beside me and felt this little ache in my chest. I wondered where you had gone. Then I got up, and everything changed.</p>
             <p>When I stepped out of the bedroom, the smell hit me first. Something savory, warm, and familiar drifted through the air. Then I saw you, standing at the kitchen top, hair a little messy, moving with this gentle focus like the whole world outside that moment didn’t exist. The light from the window brushed against your face, and for a second, I just stood there quietly, not wanting to break it. Something in my chest softened right away. That ache from waking up alone was gone. I just… felt at peace seeing you there.</p>
             <p>You turned when you noticed me and smiled. You asked me how I was, and I said I was fine. Then, almost casually, you told me you had already made coffee for me and left it on the nightstand before I woke up. I didn’t even notice it was there. That small detail hit me so hard. You thought of me first thing in the morning. You wanted to take care of me before I even opened my eyes.</p>
             <p>I walked closer, still smiling at you, and offered to help. You kept working on your beefloaf dish while I took over the eggs. The smell of both dishes mixing together made the kitchen feel warmer somehow. I don’t know why, but standing there beside you, cooking like it was the most natural thing in the world, made me feel… full. Not just in my stomach, but in my heart.</p>
             <p>We plated the food and sat down together. Your beefloaf was incredible, so tasty I could probably eat it every single morning and never get tired of it. We held hands between bites, our knees brushing under the table. We laughed softly, and the conversation flowed without any effort. We talked about the night before, the shower, how we held each other close.</p>
-            <p class="highlight">The passion was there, yes, but that wasn’t what stayed with me.<br>It was this. The quiet, domestic part.</p>
+            <p class="highlight">The passion was there, yes, but that wasn’t what stayed with me. It was this. The quiet, domestic part.</p>
             <p>And then it happened. Right there at the table, while you were telling me something and smiling in that way you do, it hit me. We had already been feeling steady. We had already been talking about the future like it was something real and possible. But that morning, I saw it. I saw it so clearly it was like watching a memory from the future. The vision wasn’t abstract anymore. It was vivid, sharp, alive. I could see you at the kitchen top, me coming up to hug you from behind, the warmth of the coffee you made, the easy rhythm of cooking side by side. The comfort of knowing this was ours.</p>
             <p>And gods, I wanted it. Not just someday. I wanted it now. I wanted to wake up every morning like this, with you already moving around in our home, coffee ready, breakfast half done. I wanted the comfort of knowing that even on quiet days, we’d have this same warmth.</p>
             <p>I think that is what changed. Before, I loved the idea of our future. I dreamed of it and felt excited when I imagined it. But after that morning, I didn’t just love the idea anymore. I loved the certainty of it. I wasn’t just hoping for it to happen. I was deciding that this is what I wanted, no matter what. And that decision made everything deeper. More grounded. More real.</p>
@@ -305,10 +309,10 @@
             <p>That morning, I didn’t just wake up to breakfast. I woke up to the rest of my life, and I saw you in it.</p>
         </div>
     </div>
-    
+
     <div id="modal-locket" class="modal-overlay">
         <div class="modal-content" style="text-align: center;">
-            <h2 class="font-heading">Marked by You</h2>
+            <h2 class="font-serif">Marked by You</h2>
             <p>The first bruise bloomed on my neck,<br>your lips spelling out a claim<br>in the quiet heat of our closeness.<br>It wasn’t just skin you touched—<br>it was the part of me that opens<br>only when trust is heavier than fear.</p>
             <p>Since then,<br>you’ve painted me again,<br>and again—<br>your mouth a brush of hunger,<br>your hands anchoring me<br>to the world we build in whispers and gasps.</p>
             <p>I have learned that loving you<br>is not just sweetness—<br>it’s the wild, unshaken rhythm<br>of wanting and being wanted.<br>It’s the way your eyes blaze,<br>and how my pulse forgets itself</p>
@@ -319,7 +323,7 @@
     
      <div id="modal-photo" class="modal-overlay">
         <div class="modal-content" style="text-align: center;">
-            <h2 class="font-heading">The First and After</h2>
+            <h2 class="font-serif">The First and After</h2>
             <p>The first time,<br>I led.<br>Not to claim, not to own,<br>but to show you the fire in me<br>and the way it bends toward you.</p>
             <p>I wanted you stirred,<br>to see yourself<br>the way I do...strong, unshaken,<br>capable of making the world kneel.</p>
             <p>And you did.</p>
@@ -334,21 +338,15 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const startBtn = document.getElementById('start-day-btn');
-            const curtain = document.getElementById('curtain');
-            const sceneContainer = document.getElementById('scene-container');
-            const steamContainer = document.getElementById('steam-container');
+            const introOverlay = document.getElementById('intro-overlay');
+            const windowFrame = document.getElementById('window-frame');
+            const mainScene = document.getElementById('main-scene');
 
-            // --- Initial Animation Trigger ---
-            startBtn.addEventListener('click', () => {
-                curtain.classList.add('drawn');
-                sceneContainer.classList.add('daybreak');
-                
-                // Delay showing the steam until the scene is brighter
-                setTimeout(() => {
-                    steamContainer.style.opacity = '1';
-                }, 4000);
-            });
+            // --- Window Opening Animation ---
+            windowFrame.addEventListener('click', () => {
+                introOverlay.classList.add('hidden');
+                mainScene.classList.add('sunrise');
+            }, { once: true }); // Ensure this only runs once
 
             // --- Modal Logic ---
             const objectMap = {
@@ -362,30 +360,27 @@
                 const modal = document.getElementById(modalId);
                 if (modal) {
                     modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
                 }
             };
 
             const closeModal = (modal) => {
                 modal.classList.remove('active');
-                // Check if any other modals are open before re-enabling scroll
-                if (document.querySelectorAll('.modal-overlay.active').length === 0) {
-                    document.body.style.overflow = 'auto';
-                }
             };
 
             // Attach click listeners to interactive objects
             for (const [objectId, modalId] of Object.entries(objectMap)) {
                 const object = document.getElementById(objectId);
                 if (object) {
-                    object.addEventListener('click', () => openModal(modalId));
+                    object.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent click from bubbling to modal overlay
+                        openModal(modalId)
+                    });
                 }
             }
 
             // Attach listeners to close modals
             document.querySelectorAll('.modal-overlay').forEach(modal => {
                 modal.addEventListener('click', (e) => {
-                    // If the click is on the overlay itself, close it
                     if (e.target === modal) {
                         closeModal(modal);
                     }
