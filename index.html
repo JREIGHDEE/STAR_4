@@ -1,274 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saturday Mornings</title>
-code
-Code
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
-
-<style>
-    :root {
-        --bg-color: #FBF8F3;
-        --text-color: #5C4B41;
-        --accent-color: #D4A373;
-        --accent-light: #EFE5D8;
-        --header-color: #8A6F5D;
-    }
-
-    body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        font-family: 'Quicksand', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    
-    .font-serif { font-family: 'Lora', serif; }
-
-    #curtains {
-        transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    #curtains.open {
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Journal: Calm Saturday Morning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Quicksand:wght@300;400;600&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --gold: #e6bf83;
+        --amber: #ecdcb3;
+        --warm-brown: #785f4c;
+        --blush: #fae8e0;
+      }
+      body {
+        font-family: 'Quicksand', 'Montserrat', sans-serif;
+      }
+      .autumn-bg {
+        background: linear-gradient(135deg, #fdf6e3 0%, #f5d6b4 43%, #e6bf83 100%);
+      }
+      .window-animation {
+        animation: windowOpen 2s cubic-bezier(0.35, 0.8, 0.4, 1) 0.5s forwards;
+      }
+      @keyframes windowOpen {
+        from {clip-path: inset(50% 0 50% 0);}
+        to {clip-path: inset(0 0 0 0);}
+      }
+      .floaty {
+        transition: transform 0.5s cubic-bezier(0.31, 1.33, 0.35, 1.14), box-shadow 0.5s;
+        box-shadow: 0 8px 40px 0 rgba(210, 176, 111, 0.13), 0 4px 16px 0 #e5c89855;
+      }
+      .floaty:hover {
+        transform: scale(1.06) rotate(-2deg) translateY(-5px) skewX(-2deg);
+        box-shadow: 0 12px 48px 0 #e5b05e38, 0 2px 8px 0 #a4774855;
+        z-index: 10;
+      }
+      .fade-in {
         opacity: 0;
-        pointer-events: none;
-    }
-
-    .journal-item {
-        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    .journal-item:hover {
-        transform: translateY(-10px) rotate(-1deg);
-        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    }
-
-    .modal-overlay {
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.5s ease-in-out;
-    }
-    .modal-overlay.active {
+        transform: translateY(30px);
+        transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.42, 0, 0.675, 1);
+      }
+      .fade-in.revealed {
         opacity: 1;
-        pointer-events: auto;
-    }
-
-    .modal-content {
-        transform: scale(0.9);
-        opacity: 0;
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .modal-overlay.active .modal-content {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    .content-prose h2 {
-        font-family: 'Lora', serif;
-        color: var(--header-color);
-        font-weight: 500;
-        font-size: 2.25rem;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-    .content-prose p {
-        margin-bottom: 1.25rem;
-        line-height: 1.8;
-    }
-    .content-prose .highlight {
-        font-family: 'Lora', serif;
-        font-style: italic;
-        color: var(--accent-color);
-        text-align: center;
-        display: block;
-        margin: 2rem 0;
-        font-size: 1.25rem;
-    }
-</style>
-</head>
-<body class="overflow-hidden">
-code
-Code
-<!-- Curtains Overlay -->
-<div id="curtains" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
-    <div class="text-center p-8">
-        <h1 class="font-serif text-5xl md:text-7xl" style="color: var(--header-color);">Good Morning, Star</h1>
-        <p class="mt-4 text-lg" style="color: var(--text-color);">The day is waiting.</p>
-        <button id="open-window-btn" class="mt-12 px-8 py-3 bg-transparent border-2 rounded-full transition-all duration-300 hover:bg-opacity-20" style="color: var(--accent-color); border-color: var(--accent-color); background-color: rgba(212, 163, 115, 0.1);">
-            Open the window
-        </button>
+        transform: none;
+      }
+      .glassmorning {
+        backdrop-filter: blur(11px) saturate(120%);
+        background: rgba(255, 242, 220, 0.62);
+        border-radius: 1.2rem;
+        border: 1.5px solid #f4e1bb70;
+      }
+    </style>
+  </head>
+  <body class="autumn-bg min-h-screen text-[#6d4f3d] overflow-x-hidden">
+    <!-- Window Opening Scene -->
+    <div id="window" class="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center z-40 bg-[#f7dfa6] window-animation">
+      <div class="flex items-center justify-center flex-col px-8">
+        <img src="https://img.icons8.com/ios-filled/100/ecdcb3/window.png" alt="Window icon" class="mb-8 opacity-90 animate-bounce"/>
+        <h1 class="text-4xl md:text-6xl font-heading font-bold text-[#785f4c] text-center drop-shadow-xl leading-tight tracking-wide">Good Morning, Star 🌞</h1>
+        <p class="mt-6 text-lg md:text-2xl font-light text-[#a0773d] text-center max-w-2xl">It’s a slow, golden Saturday. <br/>Open the window to let autumn light and warmth inside.</p>
+        <button onclick="startDay()" class="mt-10 px-8 py-3 rounded-full bg-gradient-to-br from-[#e6bf83] to-[#f4e2bb] shadow-lg text-[#785f4c] text-xl font-semibold ring-2 ring-[#e7ccb6] hover:bg-[#fae8e0] duration-150 transition-all">Open Window</button>
+      </div>
     </div>
-</div>
-
-<!-- Main Content -->
-<main id="main-content" class="min-h-screen w-full relative transition-opacity duration-1000 opacity-0">
-    <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://www.transparenttextures.com/patterns/linen.png');"></div>
-    
-    <header class="py-12 px-4 text-center relative z-10">
-        <h1 class="font-serif text-4xl md:text-5xl" style="color: var(--header-color);">A quiet collection of thoughts</h1>
-        <p class="mt-3 max-w-2xl mx-auto" style="color: var(--text-color);">Click on an item to read a memory.</p>
-    </header>
-
-    <div class="container mx-auto px-6 py-12 relative z-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-
-            <!-- Journal Item 1 -->
-            <div class="journal-item cursor-pointer group" data-modal="modal-1">
-                <div class="bg-white p-6 rounded-lg shadow-md aspect-square flex flex-col justify-center items-center text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 transition-transform duration-300 group-hover:scale-110" style="color: var(--accent-color);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                    <h3 class="font-serif text-xl" style="color: var(--header-color);">My Head on Your Chest</h3>
-                    <p class="text-sm mt-2">The sound of knowing.</p>
-                </div>
-            </div>
-
-            <!-- Journal Item 2 -->
-            <div class="journal-item cursor-pointer group" data-modal="modal-2">
-                <div class="bg-white p-6 rounded-lg shadow-md aspect-square flex flex-col justify-center items-center text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 transition-transform duration-300 group-hover:scale-110" style="color: var(--accent-color);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H7a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
-                    <h3 class="font-serif text-xl" style="color: var(--header-color);">Saturday</h3>
-                    <p class="text-sm mt-2">Waking up to the future.</p>
-                </div>
-            </div>
-
-            <!-- Journal Item 3 -->
-            <div class="journal-item cursor-pointer group" data-modal="modal-3">
-                <div class="bg-white p-6 rounded-lg shadow-md aspect-square flex flex-col justify-center items-center text-center">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 transition-transform duration-300 group-hover:scale-110" style="color: var(--accent-color);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-5.747h18" /></svg>
-                    <h3 class="font-serif text-xl" style="color: var(--header-color);">Marked by You</h3>
-                    <p class="text-sm mt-2">A quiet promise.</p>
-                </div>
-            </div>
-            
-            <!-- Journal Item 4 -->
-            <div class="journal-item cursor-pointer group" data-modal="modal-4">
-                <div class="bg-white p-6 rounded-lg shadow-md aspect-square flex flex-col justify-center items-center text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 transition-transform duration-300 group-hover:scale-110" style="color: var(--accent-color);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                    <h3 class="font-serif text-xl" style="color: var(--header-color);">The First and After</h3>
-                    <p class="text-sm mt-2">A dance of giving.</p>
-                </div>
-            </div>
-
+    <!-- Main Content -->
+    <main id="main-scene" class="relative min-h-screen">
+      <!-- Sunbeam animation overlay -->
+      <div class="absolute top-0 left-0 w-full h-[120vh] pointer-events-none z-0 flex items-start justify-center">
+        <div class="animate-pulse filter blur-lg opacity-30" style="width:800px; height:800px; background: radial-gradient(ellipse at center 20%, #fffae1 0%, #fec28a55 60%, transparent 100%);"></div>
+      </div>
+      <!-- Floating objects to open entries -->
+      <div class="relative z-10 flex pt-36 pb-16 justify-center gap-10 md:gap-20">
+        <!-- Entry 1 Object -->
+        <div onclick="openEntry(0)" class="cursor-pointer floaty fade-in glassmorning flex flex-col items-center p-7 pb-3 w-56 shadow-xl ring-2 ring-[#f4e1bb93] hover:ring-[#e6bf83] transition duration-500" style="margin-top:10vh;">
+          <img src="https://cdn-icons-png.flaticon.com/512/2436/2436692.png" class="w-16 h-16 mb-2 opacity-90" alt="Heart on Chest"/>
+          <span class="font-semibold text-lg mt-1">My Head on your Chest</span>
+          <span class="mt-1 text-[#af844a] text-xs">Click to read</span>
         </div>
-    </div>
-</main>
+        <!-- Entry 2 Object -->
+        <div onclick="openEntry(1)" class="cursor-pointer floaty fade-in glassmorning flex flex-col items-center p-7 pb-3 w-56 shadow-xl ring-2 ring-[#f4e1bb93] hover:ring-[#e6bf83] transition duration-500" style="margin-top:2vh;">
+          <img src="https://cdn-icons-png.flaticon.com/512/2940/2940773.png" class="w-16 h-16 mb-2 opacity-90" alt="Coffee Mug"/>
+          <span class="font-semibold text-lg mt-1">Saturday</span>
+          <span class="mt-1 text-[#af844a] text-xs">Click to read</span>
+        </div>
+        <!-- Entry 3 Object -->
+        <div onclick="openEntry(2)" class="cursor-pointer floaty fade-in glassmorning flex flex-col items-center p-7 pb-3 w-56 shadow-xl ring-2 ring-[#f4e1bb93] hover:ring-[#e6bf83] transition duration-500" style="margin-top:7vh;">
+          <img src="https://cdn-icons-png.flaticon.com/512/6071/6071542.png" class="w-16 h-16 mb-2 opacity-90" alt="Blush Cheek"/>
+          <span class="font-semibold text-lg mt-1">Marked by You</span>
+          <span class="mt-1 text-[#af844a] text-xs">Click to read</span>
+        </div>
+        <!-- Entry 4 Object -->
+        <div onclick="openEntry(3)" class="cursor-pointer floaty fade-in glassmorning flex flex-col items-center p-7 pb-3 w-56 shadow-xl ring-2 ring-[#f4e1bb93] hover:ring-[#e6bf83] transition duration-500" style="margin-top:4vh;">
+          <img src="https://cdn-icons-png.flaticon.com/512/2722/2722659.png" class="w-16 h-16 mb-2 opacity-90" alt="Dancing Shoes"/>
+          <span class="font-semibold text-lg mt-1">The First & After</span>
+          <span class="mt-1 text-[#af844a] text-xs">Click to read</span>
+        </div>
+      </div>
+      <!-- Animated falling leaf -->
+      <img src="https://cdn-icons-png.flaticon.com/512/2843/2843501.png" alt="falling leaf" class="absolute left-24 top-16 animate-bounce" style="width:48px;opacity:0.65"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/2843/2843493.png" alt="falling leaf" class="absolute right-24 top-10 animate-bounce delay-200" style="width:40px;opacity:0.6"/>
+      <!-- Journal Entry Modal -->
+      <div id="entryModal" class="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-40 backdrop-blur-sm hidden flex items-center justify-center">
+        <div class="relative bg-[#f8e9d6] glassmorning p-8 md:p-14 rounded-2xl shadow-2xl max-w-xl w-[96vw] md:w-[80vw] max-h-[90vh] overflow-y-auto fade-in" id="modalContents">
+          <button onclick="closeEntry()" class="absolute right-6 top-6 bg-[#e7ceb6] hover:bg-[#e6bf83] p-2 rounded-full shadow-md text-[#774e1b] font-bold text-lg transition">✕</button>
+          <div id="entryContent" class="font-serif text-lg leading-relaxed mt-8 text-[#5d4229]"></div>
+        </div>
+      </div>
+    </main>
+    <script>
+      // Control window opening animation and main scene reveal
+      function startDay() {
+        const windowElem = document.getElementById('window');
+        windowElem.classList.remove('window-animation');
+        windowElem.style.transition = 'opacity 0.8s';
+        windowElem.style.opacity = 0;
+        setTimeout(() => {
+          windowElem.style.display = 'none';
+          document.body.style.overflow = '';
+          // fade in all elements
+          document.querySelectorAll('.fade-in').forEach(e => e.classList.add('revealed'));
+        }, 700);
+      }
 
-<!-- Modals -->
-<div id="modal-1" class="modal-overlay fixed inset-0 z-40 flex items-center justify-center p-4" style="background-color: rgba(0,0,0,0.5);">
-    <div class="modal-content bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 md:p-12 rounded-lg shadow-2xl content-prose">
-        <h2 class="font-serif">My head on your Chest</h2>
-        <p>The first time I laid my head on your chest was the night I confessed. I remember thinking, <em>Should I? Is this too much?</em> But I did it anyway, and then I heard it. Your heart gave this quick, sudden thump, almost like it jumped. In my head I thought, <em>Was that because of me?</em> and I couldn’t stop smiling. I didn’t say anything, but in that moment I knew this was a place I wanted to come back to.</p>
-        <p>When we had our first kiss, I found myself doing it again without thinking. I pulled back, still catching my breath, and rested my head there. <em>She’s going to feel how fast my heart’s going,</em> I thought. Then I realized yours was just as quick, pounding under my ear. It made me want to stay there and just listen.</p>
-        <p>Then the first time we made love, afterwards, I stayed. My head on your bare chest, skin to skin. I didn’t even want to move. I remember thinking, <em>This is it. This is the closest I’ve ever been to anyone.</em> Your heart was slower now, steadier, and I felt like I could fall asleep right there and never wake up anywhere else.</p>
-        <p>Since then, it has become something I always do. In quiet moments, without really planning it, I will rest my head there again. Sometimes I close my eyes and think, <em>What’s it saying this time?</em> I notice the little changes, when it is quick, when it is calm. It feels like it tells me things you do not say out loud.</p>
-        <p>Somewhere along the way, it stopped being just a sound. It became something I need. Every time I hear it, I think about all those moments, the first startled thump, the rush after our kiss, the steady calm after our first night. And every time, I just want to stay there a little longer.</p>
-        <button class="close-modal-btn absolute top-4 right-4 text-2xl" style="color: var(--text-color);">&times;</button>
-    </div>
-</div>
-
-<div id="modal-2" class="modal-overlay fixed inset-0 z-40 flex items-center justify-center p-4" style="background-color: rgba(0,0,0,0.5);">
-    <div class="modal-content bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 md:p-12 rounded-lg shadow-2xl content-prose">
-        <h2 class="font-serif">Saturday</h2>
-        <p>I woke up alone today. The bed was still warm where you had been, but not warm enough. The air felt different without you there. I lay there for a few seconds, blinking at the ceiling, letting the quiet sink in. It wasn’t a bad quiet, but it wasn’t the kind I liked. I missed the sound of your breathing next to me. I missed the weight of you curled against me.</p>
-        <p>For a moment, I just stared at the empty space beside me and felt this little ache in my chest. I wondered where you had gone. Then I got up, and everything changed.</p>
-        <p>When I stepped out of the bedroom, the smell hit me first. Something savory, warm, and familiar drifted through the air. Then I saw you, standing at the kitchen top, hair a little messy, moving with this gentle focus like the whole world outside that moment didn’t exist. The light from the window brushed against your face, and for a second, I just stood there quietly, not wanting to break it. Something in my chest softened right away. That ache from waking up alone was gone. I just… felt at peace seeing you there.</p>
+      // Journal entries content
+      const journalEntries = [
+        `<h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-[#785f4c] font-heading">My Head on your Chest</h2>
+        <p>The first time I laid my head on your chest was the night I confessed. I remember thinking, <i>Should I? Is this too much?</i> But I did it anyway, and then I heard it. Your heart gave this quick, sudden thump, almost like it jumped. In my head I thought, <i>Was that because of me?</i> and I couldn’t stop smiling. I didn’t say anything, but in that moment I knew this was a place I wanted to come back to.</p>
+        <p>When we had our first kiss, I found myself doing it again without thinking. I pulled back, still catching my breath, and rested my head there. <i>She’s going to feel how fast my heart’s going,</i> I thought. Then I realized yours was just as quick, pounding under my ear. It made me want to stay there and just listen.</p>
+        <p>Then the first time we made love, afterwards, I stayed. My head on your bare chest, skin to skin. I didn’t even want to move. I remember thinking, <i>This is it. This is the closest I’ve ever been to anyone.</i> Your heart was slower now, steadier, and I felt like I could fall asleep right there and never wake up anywhere else.</p>
+        <p>Since then, it has become something I always do. In quiet moments, without really planning it, I will rest my head there again. Sometimes I close my eyes and think, <i>What’s it saying this time?</i> I notice the little changes, when it is quick, when it is calm. It feels like it tells me things you do not say out loud.</p>
+        <p>Somewhere along the way, it stopped being just a sound. It became something I need. Every time I hear it, I think about all those moments, the first startled thump, the rush after our kiss, the steady calm after our first night. And every time, I just want to stay there a little longer.</p>`,
+        `<h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-[#785f4c] font-heading">Saturday</h2>
+        <p>I woke up alone today.</p>
+        <p>The bed was still warm where you had been, but not warm enough. The air felt different without you there. I lay there for a few seconds, blinking at the ceiling, letting the quiet sink in. It wasn’t a bad quiet, but it wasn’t the kind I liked. I missed the sound of your breathing next to me. I missed the weight of you curled against me.</p>
+        <p>For a moment, I just stared at the empty space beside me and felt this little ache in my chest. I wondered where you had gone.</p>
+        <p>Then I got up, and everything changed.</p>
+        <p>When I stepped out of the bedroom, the smell hit me first. Something savory, warm, and familiar drifted through the air. Then I saw you, standing at the kitchen top, hair a little messy, moving with this gentle focus like the whole world outside that moment didn’t exist. The light from the window brushed against your face, and for a second, I just stood there quietly, not wanting to break it.</p>
+        <p>Something in my chest softened right away. That ache from waking up alone was gone. I just… felt at peace seeing you there.</p>
         <p>You turned when you noticed me and smiled. You asked me how I was, and I said I was fine. Then, almost casually, you told me you had already made coffee for me and left it on the nightstand before I woke up. I didn’t even notice it was there. That small detail hit me so hard. You thought of me first thing in the morning. You wanted to take care of me before I even opened my eyes.</p>
         <p>I walked closer, still smiling at you, and offered to help. You kept working on your beefloaf dish while I took over the eggs. The smell of both dishes mixing together made the kitchen feel warmer somehow. I don’t know why, but standing there beside you, cooking like it was the most natural thing in the world, made me feel… full. Not just in my stomach, but in my heart.</p>
         <p>We plated the food and sat down together. Your beefloaf was incredible, so tasty I could probably eat it every single morning and never get tired of it. We held hands between bites, our knees brushing under the table. We laughed softly, and the conversation flowed without any effort. We talked about the night before, the shower, how we held each other close.</p>
-        <p class="highlight">The passion was there, yes, but that wasn’t what stayed with me. It was this. The quiet, domestic part.</p>
-        <p>And then it happened. Right there at the table, while you were telling me something and smiling in that way you do, it hit me. We had already been feeling steady. We had already been talking about the future like it was something real and possible. But that morning, I saw it. I saw it so clearly it was like watching a memory from the future. The vision wasn’t abstract anymore. It was vivid, sharp, alive. I could see you at the kitchen top, me coming up to hug you from behind, the warmth of the coffee you made, the easy rhythm of cooking side by side. The comfort of knowing this was ours.</p>
+        <p>The passion was there, yes, but that wasn’t what stayed with me.</p>
+        <p>It was this. The quiet, domestic part. You at the kitchen top. Me beside you. The smell of breakfast filling the air. The coffee you made before I even woke up. The way our hands found each other without thinking.</p>
+        <p>And then it happened. Right there at the table, while you were telling me something and smiling in that way you do, it hit me.</p>
+        <p>We had already been feeling steady. We had already been talking about the future like it was something real and possible. But that morning, I saw it. I saw it so clearly it was like watching a memory from the future. The vision wasn’t abstract anymore. It was vivid, sharp, alive. I could see you at the kitchen top, me coming up to hug you from behind, the warmth of the coffee you made, the easy rhythm of cooking side by side. The comfort of knowing this was ours.</p>
         <p>And gods, I wanted it. Not just someday. I wanted it now. I wanted to wake up every morning like this, with you already moving around in our home, coffee ready, breakfast half done. I wanted the comfort of knowing that even on quiet days, we’d have this same warmth.</p>
         <p>I think that is what changed. Before, I loved the idea of our future. I dreamed of it and felt excited when I imagined it. But after that morning, I didn’t just love the idea anymore. I loved the certainty of it. I wasn’t just hoping for it to happen. I was deciding that this is what I wanted, no matter what. And that decision made everything deeper. More grounded. More real.</p>
         <p>Since that day, we have felt different. Closer. More loving. It’s not just “I can see us together” anymore. It’s “I can’t imagine it any other way.”</p>
         <p>And maybe that’s what love is meant to be. Not just passion, not just grand gestures, but the little things. The coffee on the nightstand. The smell of breakfast. The sound of you asking me how I am. The comfort of knowing you will still be there tomorrow.</p>
-        <p>That morning, I didn’t just wake up to breakfast. I woke up to the rest of my life, and I saw you in it.</p>
-        <button class="close-modal-btn absolute top-4 right-4 text-2xl" style="color: var(--text-color);">&times;</button>
-    </div>
-</div>
+        <p>That morning, I didn’t just wake up to breakfast. I woke up to the rest of my life, and I saw you in it.</p>`,
+        `<h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-[#785f4c] font-heading">Marked by You</h2>
+        <p>The first bruise bloomed on my neck,<br>
+        your lips spelling out a claim<br>
+        in the quiet heat of our closeness.<br>
+        It wasn’t just skin you touched—<br>
+        it was the part of me that opens<br>
+        only when trust is heavier than fear.</p>
+        <p>Since then,<br>
+        you’ve painted me again,<br>
+        and again—<br>
+        your mouth a brush of hunger,<br>
+        your hands anchoring me<br>
+        to the world we build in whispers and gasps.<br>
+        I have learned that loving you<br>
+        is not just sweetness—<br>
+        it’s the wild, unshaken rhythm<br>
+        of wanting and being wanted.</p>
+        <p>It’s the way your eyes blaze,<br>
+        and how my pulse forgets itself<br>
+        when you’re riled and unafraid.<br>
+        I let you see all of me,<br>
+        even the shameless parts,<br>
+        because you’ve shown me<br>
+        how safety can be raw and breathless.</p>
+        <p>And every mark you leave<br>
+        is a quiet promise—<br>
+        that this fire between us<br>
+        will not dim,<br>
+        only deepen.</p>`,
+        `<h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-[#785f4c] font-heading">The First and After</h2>
+        <p>The first time,<br>
+        I led.<br>
+        Not to claim, not to own,<br>
+        but to show you the fire in me<br>
+        and the way it bends toward you.<br>
+        I wanted you stirred,<br>
+        to see yourself<br>
+        the way I do...strong, unshaken,<br>
+        capable of making the world kneel.<br>
+        And you did.</p>
+        <p>After that,<br>
+        you began to lead.<br>
+        Your touch spoke in a language<br>
+        I never wanted to stop hearing.<br>
+        You carried a quiet certainty,<br>
+        and I followed,<br>
+        not out of surrender,<br>
+        but because I wanted to learn<br>
+        every way you could love me.</p>
+        <p>Now each time,<br>
+        I promise you something new.<br>
+        A different way to pull you closer,<br>
+        a different way to make you feel<br>
+        how much of myself I’ve placed in your hands.<br>
+        It is not a contest<br>
+        of who holds more power.<br>
+        It is a dance<br>
+        where each step<br>
+        is a gift we take turns giving.</p>
+        <p>And I will keep surprising you,<br>
+        not just to keep the fire alive,<br>
+        but because loving you<br>
+        means never running out of ways<br>
+        to make you know<br>
+        you are worth every moment.</p>`
+      ];
 
-<div id="modal-3" class="modal-overlay fixed inset-0 z-40 flex items-center justify-center p-4" style="background-color: rgba(0,0,0,0.5);">
-    <div class="modal-content bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 md:p-12 rounded-lg shadow-2xl content-prose text-center">
-        <h2 class="font-serif">Marked by You</h2>
-        <p>The first bruise bloomed on my neck,<br>your lips spelling out a claim<br>in the quiet heat of our closeness.<br>It wasn’t just skin you touched—<br>it was the part of me that opens<br>only when trust is heavier than fear.</p>
-        <p>Since then,<br>you’ve painted me again,<br>and again—<br>your mouth a brush of hunger,<br>your hands anchoring me<br>to the world we build in whispers and gasps.</p>
-        <p>I have learned that loving you<br>is not just sweetness—<br>it’s the wild, unshaken rhythm<br>of wanting and being wanted.<br>It’s the way your eyes blaze,<br>and how my pulse forgets itself</p>
-        <p>when you’re riled and unafraid.<br>I let you see all of me,<br>even the shameless parts,<br>because you’ve shown me<br>how safety can be raw and breathless.</p>
-        <p class="highlight">And every mark you leave<br>is a quiet promise—<br>that this fire between us<br>will not dim,<br>only deepen.</p>
-        <button class="close-modal-btn absolute top-4 right-4 text-2xl" style="color: var(--text-color);">&times;</button>
-    </div>
-</div>
+      function openEntry(idx) {
+        const modal = document.getElementById('entryModal');
+        document.getElementById('entryContent').innerHTML = journalEntries[idx];
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.classList.add('revealed'), 20);
+        document.body.style.overflow = 'hidden';
+      }
+      function closeEntry() {
+        const modal = document.getElementById('entryModal');
+        modal.classList.remove('revealed');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        }, 300);
+      }
 
-<div id="modal-4" class="modal-overlay fixed inset-0 z-40 flex items-center justify-center p-4" style="background-color: rgba(0,0,0,0.5);">
-    <div class="modal-content bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 md:p-12 rounded-lg shadow-2xl content-prose text-center">
-        <h2 class="font-serif">The First and After</h2>
-        <p>The first time,<br>I led.<br>Not to claim, not to own,<br>but to show you the fire in me<br>and the way it bends toward you.</p>
-        <p>I wanted you stirred,<br>to see yourself<br>the way I do...strong, unshaken,<br>capable of making the world kneel.</p>
-        <p>And you did.</p>
-        <p>After that,<br>you began to lead.<br>Your touch spoke in a language<br>I never wanted to stop hearing.<br>You carried a quiet certainty,</p>
-        <p>and I followed,<br>not out of surrender,<br>but because I wanted to learn<br>every way you could love me.</p>
-        <p>Now each time,<br>I promise you something new.<br>A different way to pull you closer,<br>a different way to make you feel<br>how much of myself I’ve placed in your hands.</p>
-        <p class="highlight">It is not a contest<br>of who holds more power.<br>It is a dance<br>where each step<br>is a gift we take turns giving.</p>
-        <p>And I will keep surprising you,<br>not just to keep the fire alive,<br>but because loving you<br>means never running out of ways<br>to make you know<br>you are worth every moment.</p>
-        <button class="close-modal-btn absolute top-4 right-4 text-2xl" style="color: var(--text-color);">&times;</button>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const openBtn = document.getElementById('open-window-btn');
-        const curtains = document.getElementById('curtains');
-        const mainContent = document.getElementById('main-content');
-        
-        openBtn.addEventListener('click', () => {
-            curtains.classList.add('open');
-            setTimeout(() => {
-                document.body.classList.remove('overflow-hidden');
-                mainContent.style.opacity = '1';
-            }, 500);
-        });
-
-        const journalItems = document.querySelectorAll('.journal-item');
-        const modals = document.querySelectorAll('.modal-overlay');
-        const closeButtons = document.querySelectorAll('.close-modal-btn');
-
-        journalItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const modalId = item.getAttribute('data-modal');
-                document.getElementById(modalId).classList.add('active');
-                document.body.classList.add('overflow-hidden');
-            });
-        });
-
-        const closeModal = (modal) => {
-            modal.classList.remove('active');
-            if (document.querySelectorAll('.modal-overlay.active').length === 0) {
-               document.body.classList.remove('overflow-hidden');
-            }
-        };
-        
-        closeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                closeModal(button.closest('.modal-overlay'));
-            });
-        });
-        
-        modals.forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal(modal);
-                }
-            });
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") {
-                modals.forEach(closeModal);
-            }
-        });
-    });
-</script>
-</body>
+      // Fade-in animation when window is closed
+      document.addEventListener('DOMContentLoaded', () => {
+        // hide main content at start
+        document.body.style.overflow = 'hidden';
+        document.querySelectorAll('.fade-in').forEach(e => e.classList.remove('revealed'));
+      });
+    </script>
+  </body>
 </html>
