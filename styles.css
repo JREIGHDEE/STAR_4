@@ -1,192 +1,150 @@
 /* --- FONT IMPORTS --- */
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=MonteCarlo&display=swap');
 
-/* --- KEYFRAME ANIMATIONS --- */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes floatIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes sunrise-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes drift-up {
-    0% { transform: translateY(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
-}
-
-@keyframes spin-glow {
-    0%, 100% { transform: rotate(0deg); text-shadow: 0 0 8px #FFC107; }
-    50% { transform: rotate(180deg); text-shadow: 0 0 20px #FFC107; }
-}
-
-@keyframes sunbeam {
-    0% { transform: translateY(100%) rotate(-10deg); opacity: 0; }
-    50% { opacity: 0.08; }
-    100% { transform: translateY(-100%) rotate(10deg); opacity: 0; }
-}
-
-/* --- GENERAL STYLING --- */
+/* --- GENERAL STYLING & ANIMATIONS --- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: 'IM Fell English', serif;
-    min-height: 100vh;
-    overflow: hidden;
-    /* Animated Sunrise Background */
-    background: linear-gradient(135deg, #FFDEB4, #FFEBCD, #FFDAB9, #FFB74D);
-    background-size: 400% 400%;
-    animation: sunrise-shift 25s ease infinite;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- WELCOME GREETING OVERLAY --- */
-#welcome-overlay {
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+body {
+    background-color: #FFF8E1; /* A warm, creamy base */
+    background: linear-gradient(135deg, #FFDEB4 0%, #FFEBCD 50%, #FFDAB9 100%); /* Sunrise gradient */
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+    color: #5D4037; /* A deep, warm brown for text */
+    font-family: 'IM Fell English', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- GOLDEN SPARKLE ANIMATION --- */
+.sparkle-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255,222,173,1) 0%, rgba(255,199,142,1) 100%);
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
-}
-
-#welcome-overlay.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.welcome-message {
-    text-align: center;
-    color: #5D4037;
-    animation: floatIn 2s ease-out;
-}
-
-.welcome-message h1 {
-    font-family: 'MonteCarlo', cursive;
-    font-size: 5rem;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-}
-
-.welcome-message p {
-    font-size: 1.2rem;
-    font-style: italic;
-    margin-top: 1rem;
-    opacity: 0.8;
-}
-
-/* --- MAIN CONTENT WRAPPER --- */
-#main-content {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1s 1s ease, visibility 1s 1s ease;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
-
-#main-content.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* --- SUNBEAMS & PARTICLES --- */
-body::before, body::after {
-    content: '';
-    position: fixed;
-    top: 0; left: 50%;
-    width: 300%;
-    height: 150%;
-    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
     z-index: 0;
-    animation: sunbeam 20s linear infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+.sparkle-container::before,
+.sparkle-container::after {
+    content: '✧';
+    position: absolute;
+    font-size: 1.5rem; /* Larger, more visible sparkles */
+    color: #FFD700; /* Gold color */
+    text-shadow: 0 0 10px #FFA500;
+    animation: twinkle 7s alternate infinite;
+    opacity: 0;
+}
+
+/* Distribute sparkles across the screen */
+.sparkle-container::before {
+    top: 20%; left: 10%; animation-delay: 0s;
+    font-size: 1rem;
+}
+.sparkle-container::after {
+    top: 80%; left: 90%; animation-delay: -1s;
+}
+/* Add more for a maximalist feel */
+body::before, body::after {
+    content: '✧';
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    color: #FFB74D;
+    animation: twinkle 7s alternate infinite;
+    opacity: 0;
+}
+body::before {
+    top: 50%; left: 50%; animation-delay: -3s; font-size: 1.2rem;
 }
 body::after {
-    animation-delay: -10s;
-    left: -100%;
-}
-
-.particle-container {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.particle-container::before {
-    content: '✧ ･ﾟ: *✧･ﾟ:* ☀ *:･ﾟ✧*:･ﾟ✧';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    font-size: 1.5rem;
-    color: #FFD700;
-    text-shadow: 0 0 10px #FFA500;
-    animation: drift-up 15s linear infinite;
-    animation-delay: -5s;
-}
-.particle-container::after {
-    content: '*:･ﾟ✧.  Terncy *:･ﾟ.✧';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    font-size: 1rem;
-    color: white;
-    text-shadow: 0 0 8px #FFC107;
-    animation: drift-up 20s linear infinite;
+    top: 10%; left: 85%; animation-delay: -5s; font-size: 0.8rem;
 }
 
 
-/* --- MAIN & ENTRY PAGE CONTAINER --- */
+/* --- MAIN CONTAINER & DECORATIONS --- */
 .container {
-    background: rgba(255, 250, 240, 0.8);
-    border: 2px solid #D4AF37;
-    box-shadow: 0 0 50px rgba(255, 193, 7, 0.5);
+    background-color: rgba(255, 250, 240, 0.85); /* Floral white with transparency */
+    border: 2px solid #D4AF37; /* Old gold color */
+    box-shadow: 0 0 40px rgba(255, 193, 7, 0.4);
     padding: 3rem 4rem;
     max-width: 800px;
     width: 100%;
     text-align: center;
     position: relative;
     z-index: 1;
-    border-radius: 8px;
-    backdrop-filter: blur(5px);
-    animation: floatIn 1.5s 1.5s ease-out backwards;
+    animation: fadeIn 1.5s ease-out;
+    border-radius: 8px; /* Slightly softer edges */
+    backdrop-filter: blur(4px);
 }
 
-/* --- TITLES --- */
-.main-greeting, .entry-title {
+.container::before, .container::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath d="M50,5 C60,25 90,25 95,50 C90,75 60,75 50,95 C40,75 10,75 5,50 C10,25 40,25 50,5 Z" fill="%23D4AF37" fill-opacity="0.2"/%3E%3C/svg%3E');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+}
+
+.container::before {
+    top: -40px;
+    left: -40px;
+    transform: rotate(-45deg);
+}
+
+.container::after {
+    bottom: -40px;
+    right: -40px;
+    transform: rotate(135deg);
+}
+
+
+/* --- GREETING AND TITLES --- */
+.main-greeting {
     font-family: 'MonteCarlo', cursive;
-    font-size: 3.8rem;
+    font-size: 4rem;
+    color: #8D6E63; /* A softer brown */
+    margin-bottom: 2rem;
+    text-shadow: 0 0 15px rgba(255, 224, 178, 0.8);
+    animation: gentleFloat 6s ease-in-out infinite;
+}
+
+.entry-title {
+    font-family: 'MonteCarlo', cursive;
+    font-size: 3.5rem;
     color: #8D6E63;
     margin-bottom: 2rem;
-    text-shadow: 0 0 15px rgba(255, 224, 178, 0.9);
+    text-shadow: 0 0 10px rgba(255, 224, 178, 0.8);
 }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION LINKS (MAIN PAGE) --- */
 .journal-nav {
     display: flex;
     flex-direction: column;
@@ -197,18 +155,21 @@ body::after {
 .journal-link {
     font-family: 'IM Fell English', serif;
     font-size: 1.8rem;
-    color: #A1887F;
+    color: #A1887F; /* Lighter brown */
     text-decoration: none;
     padding: 0.5rem 1rem;
     transition: all 0.4s ease;
     position: relative;
+    display: inline-block;
 }
+
 .journal-link:hover {
     color: #5D4037;
-    text-shadow: 0 0 12px #FFD700;
+    text-shadow: 0 0 10px #FFD700;
     transform: scale(1.05);
 }
 
+/* Decorative flourishes on links */
 .journal-link .link-decoration {
     display: inline-block;
     width: 50px;
@@ -220,48 +181,83 @@ body::after {
     transition: all 0.4s ease;
 }
 
-.journal-link:hover .link-decoration { background: #FFC107; }
+.journal-link:hover .link-decoration {
+    background: #FFC107;
+}
 
 .journal-link .link-decoration::before {
     content: '☀';
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.2rem;
+    transform: translateY(-50%);
+    font-size: 1rem;
     color: #D4AF37;
-    transition: all 0.6s ease;
+    transition: all 0.4s ease;
 }
+
+.journal-link .link-decoration:first-of-type::before { right: -5px; }
+.journal-link .link-decoration:last-of-type::before { left: -5px; }
 
 .journal-link:hover .link-decoration::before {
-    animation: spin-glow 2s linear infinite;
+    color: #FFC107;
+    text-shadow: 0 0 5px #FFC107;
 }
 
-/* --- INDIVIDUAL ENTRY PAGE STYLING --- */
-.page-container { animation: floatIn 1s ease-out; }
+
+/* --- INDIVIDUAL ENTRY PAGE STYLING (WITH SCROLL) --- */
+.page-container {
+    text-align: left;
+    animation: fadeIn 1s ease-in-out;
+}
 
 .entry-content {
     line-height: 1.9;
     font-size: 1.1rem;
     color: #5D4037;
-    text-align: justify;
-    max-height: 55vh;
-    overflow-y: auto;
-    padding-right: 20px;
+    text-align: justify; /* Justified text */
+    max-height: 55vh; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 20px; /* Add space for the scrollbar */
+    margin-right: -10px;
 }
 
-.entry-content::-webkit-scrollbar { width: 8px; }
-.entry-content::-webkit-scrollbar-track { background: rgba(255, 224, 178, 0.3); border-radius: 10px; }
-.entry-content::-webkit-scrollbar-thumb { background-color: #D4AF37; border-radius: 10px; border: 2px solid rgba(255, 250, 240, 0.85); }
-.entry-content::-webkit-scrollbar-thumb:hover { background-color: #FFC107; }
+/* Custom Scrollbar for a fantasy feel */
+.entry-content::-webkit-scrollbar {
+  width: 8px;
+}
+.entry-content::-webkit-scrollbar-track {
+  background: rgba(255, 224, 178, 0.3); /* Soft, light track */
+  border-radius: 10px;
+}
+.entry-content::-webkit-scrollbar-thumb {
+  background-color: #D4AF37; /* Golden scrollbar thumb */
+  border-radius: 10px;
+  border: 2px solid rgba(255, 250, 240, 0.85); /* Match the container background */
+}
+.entry-content::-webkit-scrollbar-thumb:hover {
+  background-color: #FFC107; /* Brighter gold on hover */
+}
 
-.entry-content p { margin-bottom: 1.5em; }
-.entry-content i { color: #A1887F; font-style: italic; }
-.poem { text-align: center; }
-.poem p { margin-bottom: 2em; }
+
+.entry-content p {
+    margin-bottom: 1.5em;
+}
+
+.entry-content i {
+    color: #A1887F;
+    font-style: italic;
+}
+
+.poem {
+    text-align: center; /* Poems often look better centered */
+}
+
+.poem p {
+    margin-bottom: 2em;
+}
 
 .back-link {
-    display: block;
+    display: block; /* Make it a block to center it */
     width: 100%;
     text-align: center;
     margin-top: 2rem;
@@ -271,13 +267,32 @@ body::after {
     text-decoration: none;
     transition: all 0.3s;
 }
-.back-link:hover { color: #8D6E63; text-shadow: 0 0 5px #FFD700; }
 
-/* --- RESPONSIVENESS --- */
-@media (max-width: 768px) {
-    .welcome-message h1 { font-size: 3rem; }
-    .container { padding: 2rem 1.5rem; }
-    .main-greeting, .entry-title { font-size: 2.5rem; }
-    .journal-link { font-size: 1.5rem; }
-    .entry-content { font-size: 1rem; max-height: 60vh; }
+.back-link:hover {
+    color: #8D6E63;
+    text-shadow: 0 0 5px #FFD700;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+    .container {
+        padding: 2rem 1.5rem;
+    }
+    .main-greeting {
+        font-size: 2.5rem;
+    }
+    .journal-link {
+        font-size: 1.5rem;
+    }
+    .entry-title {
+        font-size: 2.2rem;
+    }
+    .entry-content {
+        font-size: 1rem;
+        padding-right: 10px;
+        max-height: 60vh;
+    }
 }
